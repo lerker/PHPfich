@@ -1,0 +1,45 @@
+<form id="frmArtistas" name="frmArtistas" method=post> 	
+<center>
+<table align="center" border="1" cellpadding="3" cellspacing="0" width="90%">
+	<tr>
+		<th colspan="6" align="center"> <b>{var_titulo_tabla}</b></th>
+	</tr>
+	<tr>
+		<th colspan="6" align="center"> <b>{var_subtitulo_tabla}</b></th>
+	</tr>
+	<tr>
+		<th align="center" width="5%">ID Artistico</th>
+		<th align="center" width="5%">ID Actor</th>
+		<th align="center" width="20%">Nombre</th>
+		<th align="center" width="20%">Apellido</th>
+		<th align="center" width="10%">DNI</th>
+		<th align="center" width="40%">Nombre Artistico</th>
+	</tr>	
+
+	<!-- START BLOCK : blockActor -->
+	<tr>
+		<td align="left"> {var_id_art} </td> 
+		<td align="left"> {var_id_act} </td>
+		<td align="left"> {var_nom_act} </td>
+		<td align="left"> {var_ape_act} </td>
+		<td align="left"> {var_dni_act} </td> 
+		<td align="left"> {var_nAr_act} </td> 
+	</tr>
+	<!-- END BLOCK : blockActor -->
+
+	<!-- START BLOCK : block_no_Actores -->
+	<tr><td colspan="6" align="center"> {var_texto_no_actor} </td></tr>
+	<!-- END BLOCK : block_no_Actores -->
+
+</table>
+
+	<tr><td><br /></td></tr>
+    <tr>
+      <td colspan="2" align="center">
+        <input type="button" onclick="location.href='index.php?action=Ingreso::main'" value=" Volver ">
+        <input type="button" onclick="location.href='index.php?action=Pelicula::altaArtista'" value=" Agregar ">
+      </td>
+    </tr>
+    <tr><td><br /></td></tr>
+</center>
+</form>
