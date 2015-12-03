@@ -23,11 +23,11 @@ class Ingreso_Controller {
 
 
 		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Pelicula::listadoActores");
+		$tpl->assign("var_link_direccion", "index.php?action=Actor::listadoActores");
 		$tpl->assign("var_link_mostrar", "Listado de Actores");
 
 		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Pelicula::listadoActoresPorPelicula");
+		$tpl->assign("var_link_direccion", "index.php?action=Actor::listadoActoresPorPelicula");
 		$tpl->assign("var_link_mostrar", "Listado de Actores por Pelicula");
 
 		$tpl->newBlock("blockItemMenu");
@@ -35,7 +35,7 @@ class Ingreso_Controller {
 		$tpl->assign("var_link_mostrar", "Eliminar una Pelicula");
 
 		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Pelicula::eliminarActor");
+		$tpl->assign("var_link_direccion", "index.php?action=Actor::eliminarActor");
 		$tpl->assign("var_link_mostrar", "Eliminar un Actor");
 
 		// simplemente una prueba de agregar otro
@@ -44,17 +44,17 @@ class Ingreso_Controller {
 		$tpl->assign("var_link_mostrar", "Alta Pel&iacute;cula");
 
 		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Pelicula::altaArtista");
+		$tpl->assign("var_link_direccion", "index.php?action=Artista::altaArtista");
 		$tpl->assign("var_link_mostrar", "Alta Artista");
 
 		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Pelicula::bajaActor");
+		$tpl->assign("var_link_direccion", "index.php?action=Actor::bajaActor");
 		$tpl->assign("var_link_mostrar", "Baja Actor");
 
     return $tpl->getOutputContent();
   }
 
- 
+
 }
 
 

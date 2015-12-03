@@ -1,7 +1,7 @@
 <?php
 
     class Sala_Controller{
-        
+
         function insertarSala(){
             if( $_SERVER['REQUEST_METHOD'] == 'GET' ){
                 $tpl = new TemplatePower("./templates/insertarSala.html");
@@ -19,7 +19,7 @@
                 */
             }
         }
-        
+
         function editarSala( $id ){
             if( $_SERVER['REQUEST_METHOD'] == 'GET' ){
                 $tpl = new TemplatePower("./templates/editarSala.html");
@@ -35,5 +35,6 @@
                 dump( $error );*/
             }
         }
-        
+
     }
+?>

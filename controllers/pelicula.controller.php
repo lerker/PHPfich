@@ -20,7 +20,7 @@ class Pelicula_Controller{
 
     $model = new Pelicula_Model();
     # TODO
-    #$modelActores = new Actores_Model();
+    $modelActores = new Actor_Model();
 
     $listado = $model->listadoPeliculas();
 
@@ -41,9 +41,7 @@ class Pelicula_Controller{
       foreach ($listado as $data) {
 
         # genero la lista de los actores, segun el id de pelicula
-        # TODO aca va la clase de listado de actores, model actores
-        #$actores = $modelActores->listadoActoresPorPelicula($data["id_pelicula"]);
-        $actores=null; # borrar esto
+        $actores = $modelActores->listadoActoresPorPelicula($data["id_pelicula"]);
         $act = array();
         if ($actores){
           foreach ($actores as $key) { #para todos los resultados, me quedo con el nombre artistico
@@ -264,13 +262,15 @@ class Pelicula_Controller{
 
   function altaPelicula() {
     $model = new Pelicula_Model();
+    $modelGeneros = new Genero_Model();
+    $modelDirectores = new Director_Model();
 
     $tpl = new TemplatePower("templates/altaPelicula.html");
 
     $tpl->prepare();  # segunda linea necesaria
     $tpl->gotoBlock("_ROOT"); # desde el comienzo
 
-    $listado_generos = $model->listadoGeneros();
+    $listado_generos = $modelGeneros->listadoGeneros();
 
     if ($listado_generos){
       $tpl->gotoBlock("_ROOT");
@@ -291,7 +291,7 @@ class Pelicula_Controller{
     //------
 
 
-    $listado_director = $model->listadoDirectores();
+    $listado_director = $modelDirectores->listadoDirectores();
 
     if ($listado_director){
       $tpl->gotoBlock("_ROOT");
