@@ -1,11 +1,11 @@
-<form id="frmPelicula" name="frmPelicula" method=post> 	
+<form id="frmPelicula" name="frmPelicula" method=post>
 <center>
 <table align="center" border="1" cellpadding="3" cellspacing="0" width="100%">
 	<tr>
-		<th colspan="7" align="center"> <b>{var_titulo_tabla}</b></th>
+		<th colspan="7" align="center"> <b><h2>{var_titulo_tabla}</h2></b></th>
 	</tr>
 	<tr>
-		<th colspan="7" align="center"> <b>{var_subtitulo_tabla}</b></th>
+		<th colspan="7" align="center"> <b><strong><i>{var_subtitulo_tabla}</i></strong></b></th>
 	</tr>
 	<tr>
 <!--		<th align="center" width="5%">ID</th> -->
@@ -16,7 +16,7 @@
 		<th align="center" width="30%">Actores</th>
 		<th align="center" width="5%">Editar</th>
 		<th align="center" width="5%">Borrar</th>
-	</tr>	
+	</tr>
 
 	<!-- START BLOCK : blockPelicula -->
 	<tr>
@@ -24,10 +24,10 @@
 		<td align="left"> {var_nom_peli} </td>
 		<td align="center"> {var_gen_peli} </td>
 		<td align="left"> {var_dir_peli} </td>
-		<td align="center"> {var_dur_peli} </td> 
-		<td align="left"> {var_act_peli} </td> 
-		<td align="center"> <a href="index.php?action=Pelicula::editarPelicula&id={var_id_peli}"> Editar </a>  </td> 
-		<td align="center"> <a href="index.php?action=Pelicula::borrarPelicula&id={var_id_peli}"> Borrar </a>  </td> 
+		<td align="center"> {var_dur_peli} </td>
+		<td align="left"> {var_act_peli} </td>
+		<td align="center"> <a href="index.php?action=Pelicula::editarPelicula&id={var_id_peli}"> Editar </a>  </td>
+		<td align="center"> <a href="index.php?action=Pelicula::borrarPelicula&id={var_id_peli}"> Borrar </a>  </td>
 	</tr>
 	<!-- END BLOCK : blockPelicula -->
 
