@@ -9,7 +9,7 @@ session_start();
 // INCLUDES |
 //-----------
 
-include("inc.includes.php");
+include("./config/inc.includes.php");
 
 
 //===========================================================================================================
@@ -30,7 +30,7 @@ if (!isset($db)){  // si no esta la db seteada
 
 if ((!isset($_REQUEST["action"])) || ($_REQUEST["action"] == "")) {
 	// si no tenemos un campo action, o esta vacio, redirigimos todo el ingreso al inicio de nuestra app
-  $_REQUEST["action"] = "Ingreso::main"; 
+  $_REQUEST["action"] = "Ingreso::main";
 }
 if ($_REQUEST["action"] == "") { // puede pasar que no se cargue, solo por precaucion, se carga un html vacio
   $html = "";
@@ -65,13 +65,13 @@ if ($_REQUEST["action"] == "") { // puede pasar que no se cargue, solo por preca
 	$tpl = new TemplatePower("recursos/_html/index.html");
 	$tpl->prepare();
 	$tpl->assign("fecha_completa",date("d/m/y : h:m:s"));
-	$tpl->assign("aplicacion","Cine El SOBON");	
-	
+	$tpl->assign("aplicacion","Cine El SOBON");
+
 //===========================================================================================================
 // LEVANTA TEMPLATE	|
-//-------------------		
+//-------------------
 
-// aca asignamos el contenido para el contenedor 
+// aca asignamos el contenido para el contenedor
 	$tpl->gotoBlock("_ROOT");
 	$tpl->assign("contenido",$html);
 	$html=$tpl->getOutputContent();
