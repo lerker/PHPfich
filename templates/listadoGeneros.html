@@ -1,0 +1,38 @@
+<form id="frmGeneros" name="frmGeneros" method=post> 	
+<center>
+<table align="center" border="1" cellpadding="3" cellspacing="0" width="90%">
+	<tr>
+		<th colspan="6" align="center"> <b>{var_titulo_tabla}</b></th>
+	</tr>
+	<tr>
+		<th colspan="6" align="center"> <b>{var_subtitulo_tabla}</b></th>
+	</tr>
+	<tr>
+		<th align="center" width="5%">ID Genero</th>
+		<th align="center" width="20%">Nombre</th>
+	</tr>	
+
+	<!-- START BLOCK : blockGenero -->
+	<tr>
+		<td align="left"> {var_id_gen} </td> 
+		<td align="left"> {var_nom_gen} </td>
+	</tr>
+	<!-- END BLOCK : blockGenero -->
+
+	<!-- START BLOCK : block_no_Generos -->
+	<tr><td colspan="6" align="center"> {var_texto_no_genero} </td></tr>
+	<!-- END BLOCK : block_no_Generos -->
+
+</table>
+
+	<tr><td><br /></td></tr>
+    <tr>
+      <td colspan="2" align="center">
+        <input type="button" onclick="location.href='index.php?action=Ingreso::main'" value=" Volver ">
+        <input type="button" onclick="location.href='index.php?action=Genero::altaGenero'" value=" Agregar ">
+        <input type="button" onclick="location.href='index.php?action=Genero::bajaGenero'" value=" Eliminar ">
+      </td>
+    </tr>
+    <tr><td><br /></td></tr>
+</center>
+</form>
