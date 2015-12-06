@@ -1,20 +1,18 @@
-<!-- START BLOCK : editar -->
 <div class = "row">
-    <h2 class = "text-center"> Editar Sala </h2>
+    <h2 class = "text-center"> Alta Sala </h2>
     <div class = "col-md-6 col-md-offset-3">
-        <form class = "form-horizontal" id = "frmEditarSala" name = "frmEditarSala" method=post>
-            <input type="hidden" name="action" value="Sala::editarSala?id={var_idSala}">
-            <input type="hidden" id="id_sala" name = "id_sala" value = "{var_idSala}">
+        <form class = "form-horizontal" id = "frmAltaSala" name = "frmAltaSala" method=post>
+            <input type="hidden" name="action" value="Sala::altaSala">
             <div class="form-group">
                 <label for="sa_nombre" class="col-sm-2 control-label"> Nombre </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="sa_nombre" name = "sa_nombre" value = "{var_nombre}" required>
+                    <input type="text" class="form-control" id="sa_nombre" name = "sa_nombre" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="sa_horaExhibicion" class="col-sm-2 control-label"> Exhibición </label>
                 <div class="col-sm-10">
-                    <input type="time" class="form-control" id="sa_horaExhibicion" name = "sa_horaExhibicion" value = "{var_horaExhibicion}" required>
+                    <input type="time" class="form-control" id="sa_horaExhibicion" name = "sa_horaExhibicion" required>
                 </div>
             </div>
             <div class = "row text-right">
@@ -24,4 +22,3 @@
         </form>
     </div>
 </div>
-<!-- END BLOCK : editar -->

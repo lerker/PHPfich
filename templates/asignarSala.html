@@ -1,0 +1,31 @@
+<div class = "row">
+    <h2 class = "text-center"> Asignar sala </h2>
+    <div class = "col-md-6 col-md-offset-3">
+        <form class = "form-horizontal" id = "frmAsignarSala" name = "frmAsignarSala" method=post>
+            <input type="hidden" name="action" value="Sala::asignarSala?id={var_idSala}">
+            <input type="hidden" id="id_sala" name = "id_sala" value = "{var_idSala}">
+            <div class="form-group">
+                <label for="sa_nombre" class="col-sm-2 control-label"> Nombre </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="sa_nombre" name = "sa_nombre" value = "{var_nombre}" disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_pelicula" class="col-sm-2 control-label"> Película </label>
+                <div class="col-sm-10">
+                    <select class="form-control" name = "id_pelicula" id = "id_pelicula">
+                        <option value="noSelect"> -- Seleccionar película -- </option>
+                        <!-- START BLOCK : pelicula_block -->
+                        <option value = {var_idPelicula}> {var_nombrePelicula} </option>
+                        <!-- END BLOCK : pelicula_block -->
+                    </select>
+                </div>
+            </div>
+            <div class = "row text-right">
+                <button type="button" class="btn btn-default" onclick="location.href = 'index.php?action=Sala::listarSalas'"> Volver </button>
+                <button type="submit" class="btn btn-primary"> Enviar </button>
+            </div>
+        </form>
+    </div>
+</div>
+

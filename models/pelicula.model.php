@@ -111,6 +111,38 @@ class Pelicula_Model{
         # retorno la lista como resultado
         return $resultado[0];
     }
+    function getPeliculasSinSala(){
+        global $db;
+        $subSql = "SELECT distinct id_pelicula FROM pelicula_sala";
+        $sql = "SELECT p.id_pelicula , p.pe_nombre FROM pelicula p "
+             . "WHERE p.id_pelicula NOT IN ( " . $subSql ." )";
+        $res = $db->select( $sql );
+        if( $res ){
+            $peliculas = array();
+            foreach( (array) $res as $pelicula ){
+                $peliculas[] = array(
+                    'id_pelicula' => $pelicula['id_pelicula'],
+                    'pe_nombre' => $pelicula['pe_nombre']
+                );
+            }
+            return $peliculas;
+        }else{
+            return null;
+        }
+    }
+    
+    function getPeliculaBySala( $idSala ){
+        global $db;
+        $sql = "SELECT pe_nombre FROM pelicula p "
+             . "INNER JOIN pelicula_sala ps ON p.id_pelicula = ps.id_pelicula "
+             . "WHERE ps.id_sala = " . $idSala;
+        $res = $db->select( $sql );
+        $pelicula = null;
+        if( $res ){
+            $pelicula['pe_nombre'] = $res['0']['pe_nombre'];
+        }
+        return $pelicula;
+    }
 //-----------------------------------------------------------------------------
 //
 //           A L T A   B A J A  y  M O D I F I C A C I O N E S
