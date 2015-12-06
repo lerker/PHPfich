@@ -1,11 +1,9 @@
-<form id="frmBajaActor" name="frmBajaActor" method=post> 
-  <input type="hidden" id="action" name="action" value="Actor::eliminarActor">	
+<form id="frmBajaDirector" name="frmBajaDirector" method=post> 
+  <input type="hidden" id="action" name="action" value="Director::eliminarDirector">	
 
   <table align="center" border="0" cellpadding="3" cellspacing="0" width="90%">
-
-
     <tr>
-      <th colspan="4" align="center"> <b>Baja Actor</b></th>
+      <th colspan="4" align="center"> <b>Baja Director</b></th>
     </tr>
 
     <tr><td><br /></td></tr>
@@ -14,10 +12,10 @@
       <th align="right" width="35%">Nombre Artistico: </th>
       <td align="left">
         <select name="nombre_artistico" id="nombre_artistico">
-          <option value="noSelect"> -- Seleccionar un Actor -- </option>
-          <!-- START BLOCK : blockActor -->
-          <option value={var_actor_id}>{var_actor_nom}</option>
-          <!-- END BLOCK : blockActor -->
+          <option value="noSelect"> -- Seleccionar un Director -- </option>
+          <!-- START BLOCK : blockDirector -->
+          <option value={var_director_id}>{var_director_nom}</option>
+          <!-- END BLOCK : blockDirector -->
         </select>
       </td>
     </tr>

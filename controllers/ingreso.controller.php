@@ -41,10 +41,6 @@ class Ingreso_Controller {
 		$tpl->assign("var_link_direccion", "index.php?action=Pelicula::eliminarPelicula");
 		$tpl->assign("var_link_mostrar", "Eliminar una Pelicula");
 
-		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Actor::eliminarActor");
-		$tpl->assign("var_link_mostrar", "Eliminar un Actor");
-
 		// simplemente una prueba de agregar otro
 		$tpl->newBlock("blockItemMenu");
 		$tpl->assign("var_link_direccion", "index.php?action=Pelicula::altaPelicula");
@@ -78,22 +74,30 @@ class Ingreso_Controller {
 		$tpl->assign("var_link_direccion", "index.php?action=Genero::modificarGenero");
 		$tpl->assign("var_link_mostrar", "Modificar Genero");
 
+
+		$tpl->newBlock("blockItemMenu");
+		$tpl->assign("var_link_direccion", "index.php?action=Actor::altaActor");
+		$tpl->assign("var_link_mostrar", "Alta Actor");
+
+        $tpl->newBlock("blockItemMenu");
+		$tpl->assign("var_link_direccion", "index.php?action=Director::altaDirector");
+		$tpl->assign("var_link_mostrar", "Alta Director");
+
+
+        $tpl->newBlock("blockItemMenu");
+		$tpl->assign("var_link_direccion", "index.php?action=Director::bajaDirector");
+		$tpl->assign("var_link_mostrar", "Baja Director");
+
+        $tpl->newBlock("blockItemMenu");
+		$tpl->assign("var_link_direccion", "index.php?action=Actor::EditarActor");
+		$tpl->assign("var_link_mostrar", "Editar Actor");
+
+        $tpl->newBlock("blockItemMenu");
+		$tpl->assign("var_link_direccion", "index.php?action=Director::EditarDirector");
+		$tpl->assign("var_link_mostrar", "Editar Director");
+
     return $tpl->getOutputContent();
   }
 
 
 }
-
-
-#$peliculas->listadoPeliculas();
-#$peliculas->peliculasPorGenero(1);
-#$peliculas->peliculasPorDirector(1);
-
-
-#$peliculas->listadoActores();
-#$peliculas->listadoActoresPorPelicula(7);
-
-
-#echo $peliculas->eliminarPelicula(8);
-#echo $peliculas->eliminarActor("coso");
-#echo $peliculas->cambiarGenero('Titanic',4);

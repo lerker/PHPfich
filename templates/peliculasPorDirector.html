@@ -1,0 +1,61 @@
+<form id="frmPeliculaPorDirector" name="frmPeliculaPorDirector" method=post ENCTYPE="multipart/form-data"> 
+  <input type="hidden" name="action" value="Director::peliculasPorDirector">	
+ 
+  <table align="center" border="1" cellpadding="5" cellspacing="0" width="90%">
+
+    <tr>
+      <th colspan="4" align="center"> <b>LISTADO DE PELICULAS POR DIRECTOR</b></th>
+    </tr>
+    <tr>
+      <th colspan="4" align="center"> <b> Cantidad: {var_cantidad_dir}</b></th>
+    </tr>
+   <!-- START BLOCK : blockDirector -->
+    <tr>
+      
+        <th colspan="4" align="center" width="35%">Director: {var_dir_peli} </th>
+       
+        <!--<th align="center" width="35%"> </th>-->
+<!--        <th align="center" width="35%"> </th>
+        <th align="center" width="35%"> </th>-->
+       
+        
+      
+  </tr>
+  <tr>
+       <th colspan="1" align="center" width="35%">Pelicula </th>
+       <th colspan="1" align="center" width="35%">Genero</th>
+       <th colspan="1" align="center" width="35%">Actores</th>
+       <th colspan="1" align="center" width="35%">Duración</th>
+  </tr>
+<!-- START BLOCK : blockPelicula -->
+
+    <tr>
+        
+<!--      <th align="right" width="35%">Nombre Artistico: </th>-->
+      <!--<td align="left"><input type="text" name="nombreActor" id="nombreActor" size="50" maxlength="150" value="{var_nAr_act}"></td>-->
+      <td align="center">{var_nom_peli}</td>
+      <td align="center">{var_gen_peli}</td>
+      <td align="center">{var_act_peli}</td>
+      <td align="center">{var_dur_peli}</td>
+   
+<!--      <td align="center">{var_ape_act}</td>
+      <td align="center">{var_dni_act}</td>-->
+     
+    </tr>
+<!-- END BLOCK : blockPelicula-->
+<!-- START BLOCK : block_no_Peliculas -->
+<tr>
+    <th colspan="4" align="center" width="35%">{var_texto_no_pelicula}</th>
+          <!--<td align="center">{var_texto_no_pelicula}</td>-->
+</tr>
+<!-- END BLOCK : block_no_Peliculas-->
+
+    <!-- END BLOCK : blockDirector --> 
+
+
+  </table>
+  <br>
+  <center>
+    <input align="center" type="button" onclick="location.href='index.php?action=Ingreso::main'" value=" Volver ">
+   <center>
+</form>

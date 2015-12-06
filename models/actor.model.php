@@ -20,32 +20,9 @@ class Actor_Model{
         return $resultado;
     }
 
-    function listadoActoresPorPelicula($idPelicula){
-            global $db; # manejo la bases de datos dentro de la funcion
-
-            # creo la consulta SQL
-            $sql = "SELECT artista.id_artista, actor.id_actor, artista.ar_nombre, artista.ar_apellido, artista.ar_dni, artista.ar_mail, actor.ac_nombreArtistico
-                        FROM artista
-                        INNER JOIN actor
-                        ON artista.id_artista = actor.id_artista
-                        INNER JOIN pelicula_actor
-                        ON pelicula_actor.id_actor = actor.id_actor
-                        WHERE pelicula_actor.id_pelicula = ".$idPelicula;
-
-            # la envio a la bases de datos, SELECT
-            $resultado = $db->select( $sql );
-
-            # retorno la lista como resultado
-            return $resultado;
-    }
-
-//-----------------------------------------------------------------------------
-//
-//           A L T A   B A J A  y  M O D I F I C A C I O N E S
-//
-//-----------------------------------------------------------------------------
-    # retorna el Id del actor insertado, -1 para error
-    function insertarActor($nombre, $apellido, $dni, $mail, $nombreArtistico) {
+    // ALTA Y BAJA
+     # retorna el Id del actor insertado, -1 para error
+    function altaActor($nombre, $apellido, $dni, $mail, $nombreArtistico) {
         # proceso: insertar ARTISTA, insertar dicho artista como ACTOR
 
         global $db; // bases de datos dentro de la funcion
@@ -54,13 +31,13 @@ class Actor_Model{
 
         $idArtista = $db->insert($sql,true,$e);
 
-
+        dump($idArtista);
         if (isset($idArtista)){
-
-            $sqlActor = "INSERT actor(id_artista,ac_normbreArtistico) VALUES('".$idArtista."', '".$nombreArtistico."')";
+            echo $idArtista;
+            $sqlActor = "INSERT actor(id_artista,ac_nombreArtistico) VALUES('".$idArtista."', '".$nombreArtistico."')";
 
             $idActor = $db->insert($sqlActor,true,$e);
-
+            dump($idActor);
             if (isset($idActor)){
                 return $idActor;
             }
@@ -75,18 +52,69 @@ class Actor_Model{
         }
     }
 
-    function eliminarActor($nombreArtistico) {
+    function eliminarActor($idActor) {
         # puedo eliminar al actor pero no al artista aun
 
         global $db; // bases de datos dentro de la funcion
 
 
-        $sql = "DELETE FROM actor WHERE actor.ac_nombreArtistico LIKE '".$nombreArtistico."';";
+        $sql = "DELETE FROM actor WHERE actor.id_actor LIKE '".$idActor."';";
 
         $err='';
         $cantidad = $db->delete($sql);
 
         return $cantidad;
+    }
+
+     function listadoActoresPorPelicula($idPelicula){
+        global $db; # manejo la bases de datos dentro de la funcion
+
+        # creo la consulta SQL
+        $sql = "SELECT artista.id_artista, actor.id_actor, artista.ar_nombre, artista.ar_apellido, artista.ar_dni, artista.ar_mail, actor.ac_nombreArtistico
+                    FROM artista
+                    INNER JOIN actor
+                    ON artista.id_artista = actor.id_artista
+                    INNER JOIN pelicula_actor
+                    ON pelicula_actor.id_actor = actor.id_actor
+                    WHERE pelicula_actor.id_pelicula = ".$idPelicula;
+
+        # la envio a la bases de datos, SELECT
+        $resultado = $db->select( $sql );
+
+        # retorno la lista como resultado
+        return $resultado;
+    }
+
+    function getActor($id_actor)
+    {
+        global $db;
+
+        $sql = "SELECT a.ac_nombreArtistico, ar.ar_nombre, ar.ar_apellido, ar.ar_dni, ar.ar_mail from actor a
+                    INNER JOIN artista ar on a.id_artista = ar.id_artista
+                                               WHERE a.id_actor = ". $id_actor;
+        $resultado = $db->select($sql);
+
+        return $resultado;
+    }
+    function updateActor($idActor, $nombreArtistico)
+    {
+        global $db;
+
+        $sql = "UPDATE actor
+                SET ac_nombreArtistico = '".$nombreArtistico."'
+                WHERE id_actor = '".$idActor."';";
+
+        $resultado = $db->update($sql);
+
+        return $resultado;
+//        $sql =  "UPDATE actor AS ac
+//                        INNER JOIN artista as ar on ac.id_artista = ar.id_artista
+//                        SET ac.ac_nombreArtistico = '".$nombreArt."',
+//                            ar.ar_nombre = '".$nombre."',
+//                            ar.ar_apellido = '".$apellido."',
+//                            ar.ar_dni = '".$dni."',
+//                            ar.ar_mail = '".$email."'
+//                            WHERE ac.id_artista = '".$idArtista."'";
     }
 }
 ?>

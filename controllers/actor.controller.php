@@ -82,27 +82,44 @@ class Actor_Controller{
     return $tpl->getOutputContent();
 
   }
+//================================ ALTA Y BAJA ACTORES ========================================
+  function altaActor(){
+   $tpl = new TemplatePower("templates/altaActor.html");
+   $tpl->prepare();
+   return $tpl->getOutputContent();
 
-  function insertarActor($nombre, $apellido, $dni, $mail, $nombreArtistico){
+
+  }
+  function agregarActor(){
+
+    $nombre = $_REQUEST['nombre'];
+    $apellido = $_REQUEST['apellido'];
+    $dni = $_REQUEST['dni'];
+    $nombreArtistico = $_REQUEST['nombreArtistico'];
+    $mail = $_REQUEST['mail'];
+
+    dump($_REQUEST);
     $model = new Actor_Model();
 
-    $salida = $model->insertarActor($nombre, $apellido, $dni, $mail, $nombreArtistico);
+    $salida = $model->altaActor($nombre, $apellido, $dni, $mail, $nombreArtistico);
 
     return $salida;
   }
 
+
+  // ELIMINA EL ACTOR DE LA BASE DE DATOS
   function eliminarActor($nombreArtistico=0){
 
-    $nombreArtistico = $_REQUEST["nombre_artistico"];
+    $id = $_REQUEST["nombre_artistico"];
 
     $model = new Actor_Model();
 
-    $salida = $model->eliminarActor($nombreArtistico);
+    $salida = $model->eliminarActor($id);
 
-     return $this->listadoArtistas();
+
+     return $this->listadoActores();
   }
-
-
+  //ELIMINA DEL TEMPLATE EL ACTOR
   function bajaActor() {
     $model = new Actor_Model();
 
@@ -126,13 +143,101 @@ class Actor_Controller{
       #$tpl->newBlock("block_no_Actores");
       #$tpl->assign("var_texto_no_actor", "<b>NO HAY ACTORES PARA ESA PELICULA</b>");
     }
-
-
-
-
-    # finalizo la transaccion, es necesaria
     return $tpl->getOutputContent();
-
   }
+  function getActor($id_actor)
+  {
+      $model = new Actor_Model();
+
+      $salida = $model->getActor($id_actor);
+
+      return $salida;
+  }
+  function EditarActor()
+  {
+
+    $model = new Actor_Model();
+
+    $tpl = new TemplatePower("templates/EditarActor.html");
+    $tpl->prepare();  # segunda linea necesaria
+    $tpl->gotoBlock("_ROOT"); # desde el comienzo
+
+     $listado_actores = $model->listadoActores();
+
+     if ($listado_actores){
+      $tpl->gotoBlock("_ROOT");
+      foreach ($listado_actores as $data) {
+        $tpl->newBlock("blockActor");
+        $tpl->assign("id_actor", $data["id_actor"]);
+        $tpl->assign("var_nombArtistico", $data["ac_nombreArtistico"]);
+      }
+    }
+    else{
+      $tpl->gotoBlock("_ROOT");
+      #$tpl->newBlock("block_no_Actores");
+      #$tpl->assign("var_texto_no_actor", "<b>NO HAY ACTORES PARA ESA PELICULA</b>");
+    }
+    return $tpl->getOutputContent();
+  }
+  function CamposActor()
+  {
+     $model = new Actor_Model();
+     $id = $_REQUEST["nombreArtistico"];
+     $tpl = new TemplatePower("templates/CamposActor.html");
+     $tpl->prepare();  # segunda linea necesaria
+     $Actor = $model->getActor($id);
+     if ($Actor)
+     {
+            $tpl->gotoBlock("_ROOT");
+            $tpl->newBlock("block_editar");
+       foreach ($Actor as $data)
+         {
+            $tpl->assign("id_actor",$id);
+            $tpl->assign("nombreArt", $data["ac_nombreArtistico"]);
+//            $tpl->assign("nombre", $data["ar_nombre"]);
+//            $tpl->assign("apellido", $data["ar_apellido"]);
+//            $tpl->assign("dni", $data["ar_dni"]);
+//            $tpl->assign("email", $data["ar_mail"]);
+        }
+
+     }
+
+    else
+     {
+        $tpl->gotoBlock("_ROOT");
+        $tpl->newBlock("block_campo_vacio");
+        $tpl->assign("var_texto","NO SE SELECCIONO NINGUN ACTOR");
+
+     }
+     return $tpl->getOutputContent();
+  }
+  function updateActor()
+  {
+      $idActor = $_REQUEST["idActor"];
+      $nombreArtistico = $_REQUEST["nombreArtistico"];
+      dump($_REQUEST);
+//      $nombre = $_REQUEST["nombreActor"];
+//      $apellido = $_REQUEST["apellidoActor"];
+//      $dni = $_REQUEST["dniActor"];
+//      $email = $_REQUEST["emailActor"];
+
+      $model = new Actor_Model();
+
+      $resultado = $model->updateActor($idActor, $nombreArtistico);
+
+       $tpl = new TemplatePower("templates/Informe.html");
+       $tpl->prepare();
+      if ($resultado == 0 || $resultado = 1)
+      {
+        $tpl->assign("informe","Se actualizó correctamente");
+      }
+      else
+      {
+        $tpl->assign("informe","No se actualizó el campo");
+      }
+
+      return $tpl->getOutputContent();
+  }
+
 }
 ?>

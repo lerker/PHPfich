@@ -1,10 +1,10 @@
-<form id="frmActores" name="frmActores" method=post ENCTYPE="multipart/form-data"> 
-  <input type="hidden" name="action" value="Actor::listadoActores">	
+<form id="frmDirectores" name="frmDirectores" method=post ENCTYPE="multipart/form-data"> 
+  <input type="hidden" name="action" value="Director::listadoDirectores">	
  
   <table align="center" border="1" cellpadding="5" cellspacing="0" width="90%">
 
     <tr>
-      <th colspan="5" align="center"> <b>LISTADO ACTORES</b></th>
+      <th colspan="5" align="center"> <b>LISTADO DIRECTORES</b></th>
     </tr>
     <tr>
       <th colspan="5" align="center"> <b>{var_subtitulo_tabla}</b></th>
@@ -17,7 +17,7 @@
         <th align="center" width="35%">Dni: </th>
         <th align="center" width="35%">EMail: </th>
     </tr>
-        <!-- START BLOCK : blockActor -->
+        <!-- START BLOCK : blockDirector -->
     <tr>
       <!--<th align="right" width="35%">Nombre Artistico: </th>-->
       <!--<td align="left"><input type="text" name="nombreActor" id="nombreActor" size="50" maxlength="150" value="{var_nAr_act}"></td>-->
@@ -25,15 +25,16 @@
       <td align="center">{var_nom_act}</td>
       <td align="center">{var_ape_act}</td>
       <td align="center">{var_dni_act}</td>
-      <td align="center">{var_mail_act}</td>
+      <td align="center">{var_mail_dir}</td>
     </tr>
-         <!-- END BLOCK : blockActor -->
-            <!-- START BLOCK : block_no_Actores -->
+         <!-- END BLOCK : blockDirector -->
+         <!-- START BLOCK : block_no_Directores -->
          <tr>
-             <th colspan="5" align="center" width="35%">{var_texto_no_actor}</th>
+             <th colspan="5" align="center" width="35%">{var_texto_no_Director}</th>
          </tr>    
-         <!-- END BLOCK : block_no_Actores -->
+         <!-- END BLOCK : block_no_Directores -->
      
+
   </table>
   <br>
   <center>
