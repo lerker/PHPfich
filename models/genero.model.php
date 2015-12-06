@@ -31,9 +31,11 @@ class Genero_Model {
 /*funcion para eliminar un Genero de la base de datos*/ 
     function eliminarGenero($idGenero) {
         global $db; // bases de datos dentro de la funcion
-
+        
+        $sql2 = "DELETE FROM pelicula WHERE pelicula.id_genero =" . $idGenero . ";";
         $sql = "DELETE FROM genero WHERE genero.id_genero =" . $idGenero . ";";
         
+        $salida2 = $db->update($sql2, $e);
         $salida = $db->delete($sql, $e);
 
         return $salida;
