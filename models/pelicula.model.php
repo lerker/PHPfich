@@ -1,14 +1,6 @@
 <?php
 
-//var_dump($sql);
-//die();
 class Pelicula_Model{
-
-//-----------------------------------------------------------------------------
-//
-//                      L I S T A R   C O S A S
-//
-//-----------------------------------------------------------------------------
 
     function listadoPeliculas(){
         global $db; # manejo la bases de datos dentro de la funcion
