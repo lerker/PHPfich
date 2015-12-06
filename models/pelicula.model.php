@@ -183,11 +183,15 @@ class Pelicula_Model{
 
     function editarPelicula( $id, $nombrePelicula, $genero, $director, $duracion, $fechaEstreno ){
         global $db;
-        $sql = "UPDATE pelicula SET pe_nombre = '" . $nombrePelicula . "', id_genero = '" . $genero . "' ,id_director= '". $director . "', pe_fechaEstreno= '" . $fechaEstreno . "' "
-             . "WHERE id_pelicula = " . $id;
+        $sql =  "UPDATE pelicula SET pe_nombre = '" . $nombrePelicula
+                . "', id_genero = " . $genero
+                . ", id_director = ". $director
+                . ", pe_fechaEstreno = '". $fechaEstreno
+                . "', pe_duracion = ". $duracion
+                . " WHERE id_pelicula = " . $id;
         $res = $db->update( $sql );
         if( $res == 0 ){
-            // no se pudo editar la sala
+            // no se pudo editar la pelicula
             return -1;
         }
         if( $res ){

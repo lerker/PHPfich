@@ -412,11 +412,16 @@ class Pelicula_Controller{
   # edita una pelicula que viene de un formulario
   function editarPelicula_formulario() {
     $model = new Pelicula_Model();
-
     $res = $model->editarPelicula( $_REQUEST['id'], $_REQUEST['nombrePelicula'], $_REQUEST['genero'], $_REQUEST['director'], $_REQUEST['duracion'], $_REQUEST['fechaEstreno'] );
     unset($model);
-
-
+    if ( $res == -1 ){
+        echo "No se pudo editar la Pelicula, errores en los campos proporcionados";
+        die;
+    }
+    else {
+        echo "Editado con Exito!!";
+    }
+    return $this->listadoPeliculas();
   }
 }
 ?>
