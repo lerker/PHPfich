@@ -1,5 +1,5 @@
-<form id="frmAltaPelicula" name="frmAltaPelicula" method=post> 
-  <input type="hidden" id="action" name="action" value="Pelicula::agregarPelicula">	
+<form id="frmAltaPelicula" name="frmAltaPelicula" method=post>
+  <input type="hidden" id="action" name="action" value="Pelicula::agregarPelicula">
 
   <table align="center" border="0" cellpadding="3" cellspacing="0" width="90%">
 
@@ -12,7 +12,7 @@
 
     <tr>
       <th align="right" width="35%">Nombre: </th>
-      <td align="left"><input type="text" name="nombrePelicula" id="nombrePelicula" size="50" maxlength="150" value="{var_nom_pelicula}"></td>
+      <td align="left"><input type="text" name="nombrePelicula" id="nombrePelicula" size="50" maxlength="150" value="{var_nom_pelicula}" required></td>
     </tr>
 
     <tr>
@@ -25,7 +25,7 @@
           <!-- END BLOCK : blockGenero -->
         </select>
       </td>
-    </tr>  
+    </tr>
 
     <tr>
       <th align="right" width="35%">Director: </th>
@@ -37,11 +37,11 @@
           <!-- END BLOCK : blockDirector -->
         </select>
       </td>
-    </tr> 
+    </tr>
 
     <tr>
       <th align="right" width="35%">Duraci&oacute;n: </th>
-      <td align="left"><input type="text" name="duracion" id="duracion" value="{var_dur_peli}"></td>
+      <td align="left"><input type="number" name="duracion" id="duracion" value="{var_dur_peli}"></td>
     </tr>
 
     <tr>
