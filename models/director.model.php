@@ -46,21 +46,19 @@
         # retorno la lista como resultado
         return $resultado;
     }
-    function getDirectorId($idDirector)
+    function getDirectorId()
     {
         global $db;
           # creo la consulta SQL
         $sql = "SELECT id_director,di_nombreArtistico
-                    FROM director
-                    WHERE id_director = '".$idDirector."'";
-
+                    FROM director";
+        
         # la envio a la bases de datos, SELECT
         $resultado = $db->select( $sql );
 
         # retorno la lista como resultado
         return $resultado;
     }
-
 
     //ABM
 

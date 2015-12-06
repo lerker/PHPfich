@@ -215,7 +215,6 @@ class Actor_Controller{
   {
       $idActor = $_REQUEST["idActor"];
       $nombreArtistico = $_REQUEST["nombreArtistico"];
-      dump($_REQUEST);
 //      $nombre = $_REQUEST["nombreActor"];
 //      $apellido = $_REQUEST["apellidoActor"];
 //      $dni = $_REQUEST["dniActor"];

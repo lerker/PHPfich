@@ -226,7 +226,7 @@ function peliculasPorDirector($id_director=0) {
      $id = $_REQUEST["nombreArtistico"];
      $tpl = new TemplatePower("templates/CamposDirector.html");
      $tpl->prepare();  # segunda linea necesaria
-     $Director = $model->getDirectorId($id);
+     $Director = $model->getDirectores($id);
 
      if ($Director)
      {
@@ -255,7 +255,7 @@ function peliculasPorDirector($id_director=0) {
   }
   function updateDirector(){
 
-    $idActor = $_REQUEST["idDirector"];
+    $idDirector = $_REQUEST["idDirector"];
     $nombreArtistico = $_REQUEST["nombreArtistico"];
 
     $model = new Director_Model();

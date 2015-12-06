@@ -18,7 +18,7 @@ class Ingreso_Controller {
 		$tpl->assign("var_link_mostrar", "Listado de Peliculas por Genero");
 
 		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Pelicula::peliculasPorDirector");
+		$tpl->assign("var_link_direccion", "index.php?action=Director::peliculasPorDirector");
 		$tpl->assign("var_link_mostrar", "Listado de Peliculas por Director");
 
 		$tpl->newBlock("blockItemMenu");
@@ -28,6 +28,11 @@ class Ingreso_Controller {
 		$tpl->newBlock("blockItemMenu");
 		$tpl->assign("var_link_direccion", "index.php?action=Actor::listadoActores");
 		$tpl->assign("var_link_mostrar", "Listado de Actores");
+                
+                $tpl->newBlock("blockItemMenu");
+		$tpl->assign("var_link_direccion", "index.php?action=Director::listadoDirectores");
+		$tpl->assign("var_link_mostrar", "Listado de Directores");
+
 
 		$tpl->newBlock("blockItemMenu");
 		$tpl->assign("var_link_direccion", "index.php?action=Actor::listadoActoresPorPelicula");
