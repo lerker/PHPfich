@@ -1,5 +1,5 @@
 <form id="frmAltaPelicula" name="frmAltaPelicula" method=post>
-  <input type="hidden" id="action" name="action" value="Pelicula::agregarPelicula">
+  <input type="hidden" id="action" name="action" value="Pelicula::altaPelicula">
 
   <table align="center" border="0" cellpadding="3" cellspacing="0" width="90%">
 
@@ -18,8 +18,8 @@
     <tr>
       <th align="right" width="35%">G&eacute;nero: </th>
       <td align="left">
-        <select name="genero" id="genero">
-          <option value="noSelect"> -- Seleccionar un G&eacute;nero -- </option>
+        <select name="genero" id="genero" required>
+          <option value=""> -- Seleccionar un G&eacute;nero -- </option>
           <!-- START BLOCK : blockGenero -->
           <option value={var_genero_id} {var_selected}>{var_genero_nom}</option>
           <!-- END BLOCK : blockGenero -->
@@ -30,8 +30,8 @@
     <tr>
       <th align="right" width="35%">Director: </th>
       <td align="left">
-        <select name="director" id="director">
-          <option value="noSelect"> -- Seleccionar un Director -- </option>
+        <select required name="director" id="director">
+          <option value=""> -- Seleccionar un Director -- </option>
           <!-- START BLOCK : blockDirector -->
           <option value={var_director_id} {var_selected}>{var_director_nom}</option>
           <!-- END BLOCK : blockDirector -->
@@ -41,12 +41,12 @@
 
     <tr>
       <th align="right" width="35%">Duraci&oacute;n: </th>
-      <td align="left"><input type="number" name="duracion" id="duracion" value="{var_dur_peli}"></td>
+      <td align="left"><input type="number" name="duracion" id="duracion" value="{var_dur_peli}" required></td>
     </tr>
 
     <tr>
       <th align="right" width="35%">Fecha de estreno: </th>
-      <td align="left"><input type="date" name="fechaEstreno" id="fechaEstreno"></td>
+      <td align="left"><input type="date" required name="fechaEstreno" id="fechaEstreno"></td>
     </tr>
 
 
