@@ -1,53 +1,57 @@
-<!-- INCLUDE BLOCK : mensajes -->
-<div class = "row">
-    <div class = "col-md-6 col-md-offset-3">
-        <table class = "table table-hover">
-            <h2 class = "text-center"> Listado de Salas </h2>
-            <thead>
-                <tr>
-                    <th> Nombre </th>
-                    <th> Película </th>
-                    <th> Exhibición </th>
-                    <th colspan="2"> Acciones </th>
-                </tr>
-            </thead>	
-            <tbody>
-                <!-- START BLOCK : sala_block -->
-                <tr>
-                    <td> {var_nombreSala} </td>
-                    <!-- START BLOCK : pelicula_sala_block -->
-                    <td> {var_pelicula} </td>
-                    <!-- END BLOCK : pelicula_sala_block -->
-                    <!-- START BLOCK : sin_pelicula_sala_block -->
-                    <td>
-                        <a type="button" class="btn btn-link" href = "index.php?action=Sala::asignarSala?id={var_idSala}">
-                            Asignar
-                        </a>
-                    </td>
-                    <!-- END BLOCK : sin_pelicula_sala_block -->
-                    <td> {var_horaExhibicion} </td>
-                    <td>
-                        <a href="index.php?action=Sala::editarSala?id={var_idSala}">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="index.php?action=Sala::eliminarSala?id={var_idSala}" onclick="borrar(this,event,'sala');">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </a>
-                    </td>
-                </tr>
-                <!-- END BLOCK : sala_block -->
+<form id="frmSalas" name="frmSalas" method=post> 	
+    <center>
+        <table align="center" border="1" cellpadding="3" cellspacing="0" width="90%">
+            <tr>
+                <th colspan="6" align="center"> <b>{var_titulo_tabla}</b></th>
+            </tr>
+            <tr>
+                <th colspan="6" align="center"> <b>{var_subtitulo_tabla}</b></th>
+            </tr>
+            <tr>
+                <th align="center" width="20%">Nombre</th>
+                <th align="center" width="20%">Pel&iacute;cula</th>
+                <th align="center" width="20%">Exhibici&oacute;n</th>
+                <th align="center" width="5%">Editar</th>
+                <th align="center" width="5%">Borrar</th>
 
-                <!-- START BLOCK : sin_salas_block -->
-                <tr>
-                    <td> No se encontraron salas. </td>
-                </tr>
-                <!-- END BLOCK : sin_salas_block -->
-            </tbody>
+            </tr>	
+            <!-- START BLOCK : sala_block -->
+            <tr>
+                <td align = "center"> {var_nombreSala} </td>
+                <!-- START BLOCK : pelicula_sala_block -->
+                <td align = "center"> {var_pelicula} </td>
+                <!-- END BLOCK : pelicula_sala_block -->
+                <!-- START BLOCK : sin_pelicula_sala_block -->
+                <td align = "center">
+                    <a href="index.php?action=Sala::asignarSala&id={var_idSala}"> Asignar </a>
+                </td>
+                <!-- END BLOCK : sin_pelicula_sala_block -->
+                <td align = "center"> {var_horaExhibicion} </td>
+                <td align = "center">
+                    <a href="index.php?action=Sala::editarSala&id={var_idSala}"> Editar </a>
+                </td>
+                <td align = "center">
+                    <a href="index.php?action=Sala::eliminarSala&id={var_idSala}"> Borrar </a>
+                </td>
+            </tr>
+            <!-- END BLOCK : sala_block -->
+
+            <!-- START BLOCK : sin_salas_block -->
+            <tr>
+                <td> No se encontraron salas. </td>
+            </tr>
+            <!-- END BLOCK : sin_salas_block -->
+
         </table>
-    </div>
-</div>
-<div class = "row text-right">
-    <button type="button" class="btn btn-primary" onclick="location.href='index.php?action=Sala::altaSala'"> Agregar sala </button>
-</div>
+
+        <tr><td><br /></td></tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="button" onclick="location.href = 'index.php?action=Ingreso::main'" value=" Volver ">
+                <input type="button" onclick="location.href = 'index.php?action=Sala::altaSala'" value=" Agregar ">
+            </td>
+        </tr>
+        <tr><td><br /></td></tr>
+
+    </center>
+</form>

@@ -1,31 +1,39 @@
-<div class = "row">
-    <h2 class = "text-center"> Asignar sala </h2>
-    <div class = "col-md-6 col-md-offset-3">
-        <form class = "form-horizontal" id = "frmAsignarSala" name = "frmAsignarSala" method=post>
-            <input type="hidden" name="action" value="Sala::asignarSala?id={var_idSala}">
-            <input type="hidden" id="id_sala" name = "id_sala" value = "{var_idSala}">
-            <div class="form-group">
-                <label for="sa_nombre" class="col-sm-2 control-label"> Nombre </label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="sa_nombre" name = "sa_nombre" value = "{var_nombre}" disabled>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="id_pelicula" class="col-sm-2 control-label"> Película </label>
-                <div class="col-sm-10">
-                    <select class="form-control" name = "id_pelicula" id = "id_pelicula">
-                        <option value="noSelect"> -- Seleccionar película -- </option>
-                        <!-- START BLOCK : pelicula_block -->
-                        <option value = {var_idPelicula}> {var_nombrePelicula} </option>
-                        <!-- END BLOCK : pelicula_block -->
-                    </select>
-                </div>
-            </div>
-            <div class = "row text-right">
-                <button type="button" class="btn btn-default" onclick="location.href = 'index.php?action=Sala::listarSalas'"> Volver </button>
-                <button type="submit" class="btn btn-primary"> Enviar </button>
-            </div>
-        </form>
-    </div>
-</div>
+<form id="frmAsignarSala" name="frmAsignarSala" method=post> 
+    <input type="hidden" id="action" name="action" value="Sala::asignarSala">	
+    <input type="hidden" id="id_sala" name = "id_sala" value = "{var_idSala}">
+    <table align="center" border="0" cellpadding="3" cellspacing="0" width="90%">
+        <tr>
+            <th colspan="4" align="center"> <b> Asignar Sala </b></th>
+        </tr>
+
+        <tr><td><br /></td></tr>
+
+        <tr>
+            <th align="right" width="35%"> Nombre: </th>
+            <td align="left"><input type="text" name="sa_nombre" id="sa_nombre" size="50" maxlength="150" value = "{var_nombre}" disabled></td>
+        </tr>
+
+        <tr>
+            <th align="right" width="35%">Pel&iacute;cula: </th>
+            <td align="left">
+                <select name="id_pelicula" id="id_pelicula">
+                    <option value="noSelect"> -- Seleccionar un Pel&iacute;cula -- </option>
+                    <!-- START BLOCK : pelicula_block -->
+                    <option value = {var_idPelicula}> {var_nombrePelicula} </option>
+                    <!-- END BLOCK : pelicula_block -->
+                </select>
+            </td>
+        </tr>
+        
+        <tr><td><br /></td></tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="button" onclick="location.href = 'index.php?action=Sala::listarSalas'" value=" Volver ">
+                <input type="submit" value=" Enviar ">
+            </td>
+        </tr>
+        <tr><td><br /></td></tr>
+
+    </table>
+</form>
 

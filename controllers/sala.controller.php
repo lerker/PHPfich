@@ -20,10 +20,10 @@
             }
         }
         
-        function editarSala( $id ){
+        function editarSala(){
             $salaModel = new Sala_Model();
             if( $_SERVER['REQUEST_METHOD'] == 'GET' ){
-                if( $sala = $salaModel->getSalaById( $id ) ){
+                if( $sala = $salaModel->getSalaById( $_REQUEST['id'] ) ){
                     unset( $salaModel );
                     $tpl = new TemplatePower("./templates/editarSala.html");
                     $tpl->prepare();
@@ -38,32 +38,22 @@
                 }
             }
             if( $_SERVER['REQUEST_METHOD'] == 'POST' ){
-                $res = $salaModel->editarSala( $_REQUEST['id_sala'] , $_REQUEST['sa_nombre'] , $_REQUEST['sa_horaExhibicion'] );
+                $salaModel->editarSala( $_REQUEST['id_sala'] , $_REQUEST['sa_nombre'] , $_REQUEST['sa_horaExhibicion'] );
                 unset( $salaModel );
-                if( $res == -1 ){
-                    return $this->listarSalas( 'danger' , 'Error al editar la sala. Por favor, intente nuevamente.' );
-                }else{
-                    return $this->listarSalas( 'success' , 'Los datos de la sala fueron modificados con éxito.' );
-                }
+                return $this->listarSalas();
             }
         }
         
-        function eliminarSala( $id ){
+        function eliminarSala(){
             $salaModel = new Sala_Model();
-            $res = $salaModel->eliminarSala( $id );
-            if( $res == 0 ){
-                return $this->listarSalas( 'info' , 'No existe la sala.' );
-            }else{
-                return $this->listarSalas( 'success' , 'La sala fue eliminada con éxito.' );
-            }
+            $salaModel->eliminarSala( $_REQUEST['id'] );
+            unset( $salaModel );
+            return $this->listarSalas();
         }
         
-        function asignarSala( $id ){
+        function asignarSala(){
             $salaModel = new Sala_Model();
-            $sala = $salaModel->getSalaById( $id );
-            if( !$sala ){
-                return $this->listarSalas( 'info' , 'No existe la sala.' );
-            }
+            $sala = $salaModel->getSalaById( $_REQUEST['id'] );
             if( $_SERVER['REQUEST_METHOD'] == 'GET' ){
                 $tpl = new TemplatePower("templates/asignarSala.html");
                 $tpl->prepare();
@@ -81,33 +71,27 @@
             }
             if( $_SERVER['REQUEST_METHOD'] == 'POST'){
                 if( $_REQUEST['id_pelicula'] === "noSelect" ){
-                    return $this->listarSalas( 'info' , 'No se asignó ninguna película.' );
+                    return $this->listarSalas();
                 }else{
-                    $res = $salaModel->asignarSala( $_REQUEST['id_sala'] , $_REQUEST['id_pelicula'] );
-                    if( !$res ){
-                        return $this->listarSalas( 'danger' , 'Error al asignar la sala. Por favor, intente nuevamente.' );
-                    }else{
-                        return $this->listarSalas( 'success' , 'La sala ha sido asignada con éxito.' );
-                    }
+                    $salaModel->asignarSala( $_REQUEST['id_sala'] , $_REQUEST['id_pelicula'] );
+                    return $this->listarSalas();
                 }
             }
         }
         
-        function listarSalas( $class = null , $mensaje = null ){
+        function listarSalas(){
             $Model = new Sala_Model();
             $tpl = new TemplatePower("templates/listadoSalas.html");
-            $mostrar = false;
-            if( !is_null( $class ) && !is_null( $mensaje ) ){
-                $tpl->assignInclude( "mensajes" , "./templates/mensajes.html");
-                $mostrar = true;
-            }
             $tpl->prepare();
             $tpl->gotoBlock( "_ROOT" );
-            if( $mostrar ){
-                $tpl->assign( "var_clase" , $class );
-                $tpl->assign( "var_mensaje" , $mensaje );
-            }
             $listado = $Model->listarSalas();
+            
+            # formateo del encabezado de la tabla
+            $titulo_tabla = "<h1> LISTADO DE SALAS </h1>";
+            $subtitulo_tabla = "<strong><i> Cantidad: ".count($listado)."</i></strong>";
+            $tpl->assign("var_titulo_tabla",  $titulo_tabla);
+            $tpl->assign("var_subtitulo_tabla",  $subtitulo_tabla);
+            
             if( $listado ){
                 foreach( (array) $listado as $sala ){
                     $tpl->newBlock( "sala_block" );
