@@ -34,7 +34,7 @@ class Artista_Controller {
         return $this->listadoArtistas();
     }
 
-    /* funcion que me lista todos los Artistas */ /* OJO ACA ESTA METIDO TMB EL FORMULARIO */
+    /* funcion que me lista todos los Artistas */
 
     function listadoArtistas() {
         $model = new Artista_Model();
@@ -72,14 +72,6 @@ class Artista_Controller {
 
     /* funcion que se comunica con el modelo y elimina el Artista deseado */
 
-    function eliminarArtista($idArtista) {
-        $model = new Artista_Model();
-
-        $salida = $model->eliminarArtista($idArtista);
-
-        return $salida;
-    }
-
     function borrarArtista() {
         $id_Artista = $_REQUEST["id"];
         $model = new Artista_Model();
@@ -88,12 +80,12 @@ class Artista_Controller {
         if ($salida == -1) {
             echo "NO se puedo agregar a la base de datos";
         } else {
-            echo"Se agrego correctamente a la base de datos";
+            echo"Se elimino correctamente a la base de datos";
         }
 
         return $this->listadoArtistas();
     }
-
+   /* funcion para editar un artista*/
     function editarArtista() {
         $id_Artista = $_REQUEST["id"];
 
@@ -117,7 +109,7 @@ class Artista_Controller {
         # finalizo la transaccion, es necesaria
         return $tpl->getOutputContent();
     }
-
+   /* funcion para actualizar un artista*/
     function actualizarArtista() {
         $idArtista = $_REQUEST["id"];
         $nombre = $_REQUEST["nombre"];
@@ -131,7 +123,7 @@ class Artista_Controller {
         if ($salida == -1) {
             echo "NO se puedo agregar a la base de datos";
         } else {
-            echo"Se agrego correctamente a la base de datos";
+            echo"Se edito correctamente a la base de datos";
         }
         return $this->listadoArtistas();
     }

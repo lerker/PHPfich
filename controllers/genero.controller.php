@@ -1,7 +1,7 @@
 <?php
 
 class Genero_Controller {
-
+ /* con esta funcion solo llamo a crear al template para agregar Generos */
     function listadoGeneros() {
         $model = new Genero_Model();
         $listado = $model->listadoGeneros();
@@ -32,7 +32,7 @@ class Genero_Controller {
         return $tpl->getOutputContent();
     }
 
-    /* con esta funcion solo llamo a crear al template para agregar artista */
+    /* con esta funcion solo llamo a crear al template para agregar genero */
 
     function altaGenero() {
         $tpl = new TemplatePower("templates/altaGenero.html");
@@ -61,7 +61,7 @@ class Genero_Controller {
 
         return $this->listadoGeneros();
     }
-
+   /* funcion que me permite borrar un genero*/
     function borrarGenero() {
         $id_Genero = $_REQUEST["id"];
         $model = new Genero_Model();
@@ -70,12 +70,13 @@ class Genero_Controller {
         if ($salida == -1) {
             echo "NO se puedo agregar a la base de datos";
         } else {
-            echo"Se agrego correctamente a la base de datos";
+            echo"Se elimino correctamente a la base de datos";
         }
         
         return $this->listadoGeneros();
     }
 
+    /*funcion que me permite editar un genero*/
     function editarGenero() {
         $id_Genero = $_REQUEST["id"];
 
@@ -96,6 +97,7 @@ class Genero_Controller {
         return $tpl->getOutputContent();
     }
 
+    /*funcion que me permite actualizar el genero*/
     function actualizarGenero() {
         $idGenero = $_REQUEST["id"];
         $nombre = $_REQUEST["nombre"];
@@ -106,7 +108,7 @@ class Genero_Controller {
            if ($salida == -1) {
             echo "NO se puedo agregar a la base de datos";
         } else {
-            echo"Se agrego correctamente a la base de datos";
+            echo"Se edito correctamente a la base de datos";
         }
         
         return $this->listadoGeneros();
