@@ -130,7 +130,7 @@ class Pelicula_Model{
             return null;
         }
     }
-    
+
     function getPeliculaBySala( $idSala ){
         global $db;
         $sql = "SELECT pe_nombre FROM pelicula p "
@@ -180,5 +180,20 @@ class Pelicula_Model{
         return $cantidad;
     }
 
+
+    function editarPelicula( $id, $nombrePelicula, $genero, $director, $duracion, $fechaEstreno ){
+        global $db;
+        $sql = "UPDATE pelicula SET pe_nombre = '" . $nombrePelicula . "', id_genero = '" . $genero . "' ,id_director= '". $director . "', pe_fechaEstreno= '" . $fechaEstreno . "' "
+             . "WHERE id_pelicula = " . $id;
+        $res = $db->update( $sql );
+        if( $res == 0 ){
+            // no se pudo editar la sala
+            return -1;
+        }
+        if( $res ){
+            // Se inserto con exito (Retorna numero de filas afectadas)
+            return $res;
+        }
+    }
 }
 ?>
