@@ -1,10 +1,9 @@
 <?php
 
-class Artista_Controller{
+class Artista_Controller {
+    /* con esta funcion solo llamo a crear al template para agregar artista */
 
-/*con esta funcion solo llamo a crear al template para agregar artista*/
-      function altaArtista() {
-        $model = new Artista_Model();
+    function altaArtista() {
 
         $tpl = new TemplatePower("templates/altaArtista.html");
 
@@ -13,27 +12,30 @@ class Artista_Controller{
         # finalizo la transaccion, es necesaria
         return $tpl->getOutputContent();
     }
-    
-/*esta funcion se dispara cuando presiono el boton guardar dentro del formulario*/
+
+    /* esta funcion se dispara cuando presiono el boton guardar dentro del formulario */
+
     function agregarArtista() {
 
-        #$id_pelicula
         $nombre = $_REQUEST["nombre"];
         $apellido = $_REQUEST["apellido"];
         $dni = $_REQUEST["dni"];
         $mail = $_REQUEST["mail"];
 
-        #dump ($_REQUEST);
-        #die;
         $model = new Artista_Model();
         $salida = $model->insertarArtista($nombre, $apellido, $dni, $mail);
-        if($salida==-1){
-            echo "No ingreso correctamente nombre y apellido, no se pudo agregar el Artista";
-            die;
+
+        if ($salida == -1) {
+            echo "NO se puedo agregar a la base de datos";
+        } else {
+            echo"Se agrego correctamente a la base de datos";
         }
+
         return $this->listadoArtistas();
     }
- /* funcion que me lista todos los Artistas*/ /*OJO ACA ESTA METIDO TMB EL FORMULARIO*/  
+
+    /* funcion que me lista todos los Artistas */ /* OJO ACA ESTA METIDO TMB EL FORMULARIO */
+
     function listadoArtistas() {
         $model = new Artista_Model();
         $listado = $model->listadoArtistas();
@@ -43,7 +45,6 @@ class Artista_Controller{
         $tpl = new TemplatePower("templates/listadoArtistas.html"); # creo el template
         $tpl->prepare();  # segunda linea necesaria
         $tpl->gotoBlock("_ROOT"); # desde el comienzo
-        
         #formateo del encabezado de la tabla
         $titulo_tabla = "<h2> LISTADO DE ARTISTAS </h2>";
         $subtitulo_tabla = "<strong><i> Cantidad: " . count($listado) . "</i></strong>";
@@ -68,49 +69,34 @@ class Artista_Controller{
         # finalizo la transaccion, es necesaria
         return $tpl->getOutputContent();
     }
-/* funcion que me crea el formulario para eliminar un Artista*/
-    function bajaArtista() {
+
+    /* funcion que se comunica con el modelo y elimina el Artista deseado */
+
+    function eliminarArtista($idArtista) {
         $model = new Artista_Model();
 
-        $tpl = new TemplatePower("templates/bajaArtista.html");
-
-        $tpl->prepare();  # segunda linea necesaria
-        $tpl->gotoBlock("_ROOT"); # desde el comienzo
-
-        $listado_artistas = $model->listadoArtistas();
-
-        if ($listado_artistas) {
-            $tpl->gotoBlock("_ROOT");
-            foreach ($listado_artistas as $data) {
-                $tpl->newBlock("blockArtista");
-                $tpl->assign("var_artista_id", $data["id_artista"]);
-                $aux=$data["ar_nombre"];//esto es una negrada..pero funcaa..ver de cambiarlo si llegamos
-                $aux.=" ";
-                $aux.=$data["ar_apellido"];
-                $tpl->assign("var_ar_nombre", $aux);
-                
-            }
-        } else {
-            $tpl->gotoBlock("_ROOT");
-            #$tpl->newBlock("block_no_Artistas");
-            #$tpl->assign("var_texto_no_artista", "<b>NO HAY ARTISTAS</b>");
-        }
-        # finalizo la transaccion, es necesaria
-        return $tpl->getOutputContent();
-    }
-/*funcion que se comunica con el modelo y elimina el Artista deseado*/
-    function eliminarArtista() {
-        $idArtista = $_REQUEST["nombre_apellido"];
-        $model = new Artista_Model();
         $salida = $model->eliminarArtista($idArtista);
-        if($salida==-1){
-            echo "No selecciono un Artista, no se elimino ningun Artista ";
-            die;
+
+        return $salida;
+    }
+
+    function borrarArtista() {
+        $id_Artista = $_REQUEST["id"];
+        $model = new Artista_Model();
+        $salida = $model->eliminarArtista($id_Artista);
+
+        if ($salida == -1) {
+            echo "NO se puedo agregar a la base de datos";
+        } else {
+            echo"Se agrego correctamente a la base de datos";
         }
+
         return $this->listadoArtistas();
     }
-    
-    function modificarArtista() {
+
+    function editarArtista() {
+        $id_Artista = $_REQUEST["id"];
+
         $model = new Artista_Model();
 
         $tpl = new TemplatePower("templates/modificarArtista.html");
@@ -118,43 +104,38 @@ class Artista_Controller{
         $tpl->prepare();  # segunda linea necesaria
         $tpl->gotoBlock("_ROOT"); # desde el comienzo
 
+
+        $artista = $model->getArtista($id_Artista);
+        $tpl->assign("var_nom_artista", $artista["ar_nombre"]);
+        $tpl->assign("var_ape_artista", $artista["ar_apellido"]);
+        $tpl->assign("var_dni_artista", $artista["ar_dni"]);
+        $tpl->assign("var_mail_artista", $artista["ar_mail"]);
+
         $listado_artistas = $model->listadoArtistas();
 
-        if ($listado_artistas) {
-            $tpl->gotoBlock("_ROOT");
-            foreach ($listado_artistas as $data) {
-                $tpl->newBlock("blockModArtista");
-                $tpl->assign("var_artista_id", $data["id_artista"]);
-                $aux=$data["ar_nombre"];//esto es una negrada..pero funcaa..ver de cambiarlo si llegamos
-                $aux.=" ";
-                $aux.=$data["ar_apellido"];
-                $tpl->assign("var_ar_nombre", $aux);
-                
-            }
-        } else {
-            $tpl->gotoBlock("_ROOT");
-            #$tpl->newBlock("block_no_Artistas");
-            #$tpl->assign("var_texto_no_artista", "<b>NO HAY ARTISTAS</b>");
-        }
+
         # finalizo la transaccion, es necesaria
         return $tpl->getOutputContent();
     }
-    
+
     function actualizarArtista() {
-        $idArtista = $_REQUEST["nombre_apellido"];
+        $idArtista = $_REQUEST["id"];
         $nombre = $_REQUEST["nombre"];
         $apellido = $_REQUEST["apellido"];
         $dni = $_REQUEST["dni"];
         $mail = $_REQUEST["mail"];
-        
+
         $model = new Artista_Model();
         $salida = $model->actualizarArtista($idArtista, $nombre, $apellido, $dni, $mail);
-        if($salida==-1){
-            echo "Seleccione correctamente un Artista a Modificar y especifique su nuevo nombre y apellido";
-            die;
+
+        if ($salida == -1) {
+            echo "NO se puedo agregar a la base de datos";
+        } else {
+            echo"Se agrego correctamente a la base de datos";
         }
         return $this->listadoArtistas();
     }
 
 }
+
 ?>
