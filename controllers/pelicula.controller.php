@@ -344,6 +344,7 @@ class Pelicula_Controller{
     return $this->listadoPeliculas();
   }
 
+  # carga formulario con los cambios
   function editarPelicula() {
     # TODO
     #$id_pelicula = id
@@ -353,19 +354,15 @@ class Pelicula_Controller{
     $modelGeneros = new Genero_Model();
     $modelDirectores = new Director_Model();
 
-    $tpl = new TemplatePower("templates/altaPelicula.html");
+    $tpl = new TemplatePower("templates/editarPelicula.html");
 
     $tpl->prepare();  # segunda linea necesaria
     $tpl->gotoBlock("_ROOT"); # desde el comienzo
 
-    #       NOMBRE
-
-    # array(6) { ["id_pelicula"]=> string(2) "11" ["pe_nombre"]=> string(9) "El wachon" ["ge_nombre"]=> string(5) "Drama" ["di_nombreArtistico"]=> string(13) "James Cameron" ["pe_duracion"]=> string(2) "88" ["pe_fechaEstreno"]=> string(10) "2015-11-20" }
     $pelicula = $model->getPelicula($id_pelicula);
     $tpl->assign("var_nom_pelicula",$pelicula["pe_nombre"]);
     $tpl->assign("var_dur_peli",$pelicula["pe_duracion"]);
     $tpl->assign("var_fe_peli",$pelicula["pe_fechaEstreno"]);
-
 
     $listado_generos = $modelGeneros->listadoGeneros();
 
@@ -385,8 +382,6 @@ class Pelicula_Controller{
       #$tpl->newBlock("block_no_Actores");
       #$tpl->assign("var_texto_no_actor", "<b>NO HAY ACTORES PARA ESA PELICULA</b>");
     }
-
-
 
     //------
 
@@ -409,12 +404,19 @@ class Pelicula_Controller{
       #$tpl->assign("var_texto_no_actor", "<b>NO HAY ACTORES PARA ESA PELICULA</b>");
     }
 
-    $tpl->assign("var_dur_peli",$pelicula["pe_duracion"]);
-
-
 
     # finalizo la transaccion, es necesaria
     return $tpl->getOutputContent();
+  }
+
+  # edita una pelicula que viene de un formulario
+  function editarPelicula_formulario() {
+    $model = new Pelicula_Model();
+
+    $res = $model->editarPelicula( $_REQUEST['id'], $_REQUEST['nombrePelicula'], $_REQUEST['genero'], $_REQUEST['director'], $_REQUEST['duracion'], $_REQUEST['fechaEstreno'] );
+    unset($model);
+
+
   }
 }
 ?>
