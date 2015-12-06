@@ -52,33 +52,8 @@ class Ingreso_Controller {
 		$tpl->assign("var_link_mostrar", "Alta Pel&iacute;cula");
 
 		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Artista::altaArtista");
-		$tpl->assign("var_link_mostrar", "Alta Artista");
-
-		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Artista::bajaArtista");
-		$tpl->assign("var_link_mostrar", "Baja Artista");
-
-		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Artista::modificarArtista");
-		$tpl->assign("var_link_mostrar", "Modificar Artista");
-
-		$tpl->newBlock("blockItemMenu");
 		$tpl->assign("var_link_direccion", "index.php?action=Actor::bajaActor");
 		$tpl->assign("var_link_mostrar", "Baja Actor");
-
-		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Genero::altaGenero");
-		$tpl->assign("var_link_mostrar", "Alta Genero");
-
-		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Genero::bajaGenero");
-		$tpl->assign("var_link_mostrar", "Baja Genero");
-
-		$tpl->newBlock("blockItemMenu");
-		$tpl->assign("var_link_direccion", "index.php?action=Genero::modificarGenero");
-		$tpl->assign("var_link_mostrar", "Modificar Genero");
-
 
 		$tpl->newBlock("blockItemMenu");
 		$tpl->assign("var_link_direccion", "index.php?action=Actor::altaActor");
@@ -87,7 +62,6 @@ class Ingreso_Controller {
         $tpl->newBlock("blockItemMenu");
 		$tpl->assign("var_link_direccion", "index.php?action=Director::altaDirector");
 		$tpl->assign("var_link_mostrar", "Alta Director");
-
 
         $tpl->newBlock("blockItemMenu");
 		$tpl->assign("var_link_direccion", "index.php?action=Director::bajaDirector");

@@ -1,5 +1,5 @@
 <form id="frmModificarArtista" name="frmModificarArtista" method=post> 
-  <input type="hidden" id="action" name="action" value="Artista::actualizarArtista">	
+  <input type="hidden" id="action" name="action" value="Artista::actualizarArtista">  
 
   <table align="center" border="0" cellpadding="3" cellspacing="0" width="90%">
 
@@ -10,36 +10,25 @@
 
     <tr><td><br /></td></tr>
 
-    <tr>
-      <th align="right" width="35%">Artista: </th>
-      <td align="left">
-        <select name="nombre_apellido" id="nombre_apellido">
-          <option value="noSelect"> -- Seleccionar un Artista -- </option>
-          <!-- START BLOCK : blockModArtista -->
-          <option value={var_artista_id}>{var_ar_nombre}</option>
-          <!-- END BLOCK : blockModArtista -->
-        </select>
-      </td>
-    </tr>
 
     <tr>
       <th align="right" width="35%">Nombre: </th>
-      <td align="left"><input type="text" name="nombre" id="nombre" size="50" maxlength="150"></td>
+      <td align="left"><input type="text" name="nombre" id="nombre" size="50" maxlength="150" value="{var_nom_artista}" required></td>
     </tr>
 
     <tr>
       <th align="right" width="35%">Apellido: </th>
-      <td align="left"><input type="text" name="apellido" id="apellido" size="50"></td>
+      <td align="left"><input type="text" name="apellido" id="apellido" size="50" value="{var_ape_artista}" required></td>
     </tr>
 
     <tr>
       <th align="right" width="35%">DNI: </th>
-      <td align="left"><input type="number" name="dni" id="dni"></td>
+      <td align="left"><input type="number" name="dni" id="dni"value="{var_dni_artista}" required></td>
     </tr>
 
     <tr>
       <th align="right" width="35%">Mail: </th>
-      <td align="left"><input type="text" name="mail" id="mail"></td>
+      <td align="left"><input type="text" name="mail" id="mail" value="{var_mail_artista}" required></td>
     </tr>
 
     <tr><td><br /></td></tr>

@@ -1,7 +1,7 @@
 <?php
 
-class Genero_Controller{
-    
+class Genero_Controller {
+ /* con esta funcion solo llamo a crear al template para agregar Generos */
     function listadoGeneros() {
         $model = new Genero_Model();
         $listado = $model->listadoGeneros();
@@ -31,11 +31,10 @@ class Genero_Controller{
         # finalizo la transaccion, es necesaria
         return $tpl->getOutputContent();
     }
-    
-/*con esta funcion solo llamo a crear al template para agregar artista*/
-    function altaGenero() {
-        $model = new Genero_Model();
 
+    /* con esta funcion solo llamo a crear al template para agregar genero */
+
+    function altaGenero() {
         $tpl = new TemplatePower("templates/altaGenero.html");
 
         $tpl->prepare();  # segunda linea necesaria
@@ -43,63 +42,44 @@ class Genero_Controller{
         # finalizo la transaccion, es necesaria
         return $tpl->getOutputContent();
     }
-    
-/*esta funcion se dispara cuando presiono el boton guardar dentro del formulario*/
+
+    /* esta funcion se dispara cuando presiono el boton guardar dentro del formulario */
+
     function agregarGenero() {
 
-        #$id_pelicula
+        #$id_genero
         $nombre = $_REQUEST["nombre"];
-        #dump ($_REQUEST);
-        #die;
+
         $model = new Genero_Model();
         $salida = $model->insertarGenero($nombre);
-        if($salida==-1){
-            echo "No ingreso un nombre, no se pudo agregar el Genero";
-            die;
-        }
-        return $this->listadoGeneros();
-    }
-    
-    /* funcion que me crea el formulario para eliminar un Genero*/
-    function bajaGenero() {
-        $model = new Genero_Model();
 
-        $tpl = new TemplatePower("templates/bajaGenero.html");
-
-        $tpl->prepare();  # segunda linea necesaria
-        $tpl->gotoBlock("_ROOT"); # desde el comienzo
-
-        $listado_generos = $model->listadoGeneros();
-
-        if ($listado_generos) {
-            $tpl->gotoBlock("_ROOT");
-            foreach ($listado_generos as $data) {
-                $tpl->newBlock("blockGenero");
-                $tpl->assign("var_gen_id", $data["id_genero"]);
-                $tpl->assign("var_gen_nombre", $data["ge_nombre"]);
-                
-            }
+        if ($salida == -1) {
+            echo "NO se puedo agregar a la base de datos";
         } else {
-            $tpl->gotoBlock("_ROOT");
-            #$tpl->newBlock("block_no_Generos");
-            #$tpl->assign("var_texto_no_Generos", "<b>NO HAY GENEROS</b>");
+            echo"Se agrego correctamente a la base de datos";
         }
-        # finalizo la transaccion, es necesaria
-        return $tpl->getOutputContent();
-    }
-/*funcion que se comunica con el modelo y elimina el Artista deseado*/
-    function eliminarGenero() {
-        $idGenero = $_REQUEST["nombre_gen"];
-        $model = new Genero_Model();
-        $salida = $model->eliminarGenero($idGenero);
-        if($salida==-1){
-            echo "No selecciono un genero, no se pudo eliminar ningun Genero";
-            die;
-        }
+
         return $this->listadoGeneros();
     }
-    
-    function modificarGenero() {
+   /* funcion que me permite borrar un genero*/
+    function borrarGenero() {
+        $id_Genero = $_REQUEST["id"];
+        $model = new Genero_Model();
+        $salida = $model->eliminarGenero($id_Genero);
+        
+        if ($salida == -1) {
+            echo "NO se puedo agregar a la base de datos";
+        } else {
+            echo"Se elimino correctamente a la base de datos";
+        }
+        
+        return $this->listadoGeneros();
+    }
+
+    /*funcion que me permite editar un genero*/
+    function editarGenero() {
+        $id_Genero = $_REQUEST["id"];
+
         $model = new Genero_Model();
 
         $tpl = new TemplatePower("templates/modificarGenero.html");
@@ -107,34 +87,30 @@ class Genero_Controller{
         $tpl->prepare();  # segunda linea necesaria
         $tpl->gotoBlock("_ROOT"); # desde el comienzo
 
+        $genero = $model->getGenero($id_Genero);
+        $tpl->assign("var_nom_genero", $genero["ge_nombre"]);
+
+
         $listado_generos = $model->listadoGeneros();
 
-        if ($listado_generos) {
-            $tpl->gotoBlock("_ROOT");
-            foreach ($listado_generos as $data) {
-                $tpl->newBlock("blockModGenero");
-                $tpl->assign("var_gen_id", $data["id_genero"]);
-                $tpl->assign("var_gen_nombre", $data["ge_nombre"]);
-            }
-        } else {
-            $tpl->gotoBlock("_ROOT");
-            #$tpl->newBlock("block_no_Generos");
-            #$tpl->assign("var_texto_no_Generos", "<b>NO HAY GENEROS</b>");
-        }
         # finalizo la transaccion, es necesaria
         return $tpl->getOutputContent();
     }
-    
+
+    /*funcion que me permite actualizar el genero*/
     function actualizarGenero() {
-        $idGenero = $_REQUEST["nombre_gen"];
+        $idGenero = $_REQUEST["id"];
         $nombre = $_REQUEST["nombre"];
-        
+
         $model = new Genero_Model();
         $salida = $model->actualizarGenero($idGenero, $nombre);
-        if($salida==-1){
-            echo "Seleccione correctamente un genero a cambiar y especifique su nuevo nombre";
-            die;
+
+           if ($salida == -1) {
+            echo "NO se puedo agregar a la base de datos";
+        } else {
+            echo"Se edito correctamente a la base de datos";
         }
+        
         return $this->listadoGeneros();
     }
 

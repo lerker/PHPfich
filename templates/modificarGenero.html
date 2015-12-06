@@ -1,5 +1,5 @@
 <form id="frmModificarGenero" name="frmModificarGenero" method=post> 
-  <input type="hidden" id="action" name="action" value="Genero::actualizarGenero">	
+  <input type="hidden" id="action" name="action" value="Genero::actualizarGenero">  
 
   <table align="center" border="0" cellpadding="3" cellspacing="0" width="90%">
 
@@ -11,20 +11,8 @@
     <tr><td><br /></td></tr>
 
     <tr>
-      <th align="right" width="35%">Genero: </th>
-      <td align="left">
-        <select name="nombre_gen" id="nombre_gen">
-          <option value="noSelect"> -- Seleccionar un Genero -- </option>
-          <!-- START BLOCK : blockModGenero -->
-          <option value={var_gen_id}>{var_gen_nombre}</option>
-          <!-- END BLOCK : blockModGenero -->
-        </select>
-      </td>
-    </tr>
-
-    <tr>
       <th align="right" width="35%">Nombre nuevo: </th>
-      <td align="left"><input type="text" name="nombre" id="nombre" size="50" maxlength="150"></td>
+      <td align="left"><input type="text" name="nombre" id="nombre" size="50" maxlength="150" value="{var_nom_genero}" required></td>
     </tr>
 
     <tr><td><br /></td></tr>

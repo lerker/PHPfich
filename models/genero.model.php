@@ -20,46 +20,47 @@ class Genero_Model {
     function insertarGenero($nombre) {
         # proceso: insertar GENERO
         global $db; // bases de datos dentro de la funcion
-        if($nombre!=NULL){
-            $sql = "INSERT genero(id_genero, ge_nombre)
+        
+        $sql = "INSERT genero(id_genero, ge_nombre)
                 VALUES ('','" . $nombre . "')";
-            $salida = $db->insert($sql, true, $e);
-        }
-        else{
-            //echo "No ingreso un nombre, no se puedo insertar el Genero";
-            $salida=-1;
-            
-        }
+        
+        $salida = $db->insert($sql, true, $e);
         
         return $salida;
     }
 /*funcion para eliminar un Genero de la base de datos*/ 
-    function eliminarGenero($value) {
+    function eliminarGenero($idGenero) {
         global $db; // bases de datos dentro de la funcion
+
+        $sql = "DELETE FROM genero WHERE genero.id_genero =" . $idGenero . ";";
         
-        if($value!="noSelect"){
-            $sql = "DELETE FROM genero WHERE (id_genero =" . $value . ")";
-            $salida = $db->delete($sql, $e);
-        }
-        else{
-            $salida=-1;
-        }
+        $salida = $db->delete($sql, $e);
+
         return $salida;
     }
-    
+  /*funcion para actualizar un Genero de la base de datos*/   
     function actualizarGenero($idGenero, $nombre) {
         # proceso: insertar ARTISTA
         global $db; // bases de datos dentro de la funcion
-        if(($idGenero!="noSelect")&&($nombre!=NULL)){
-            $sql = "UPDATE genero SET ge_nombre='" . $nombre . "' WHERE (id_genero =" . $idGenero . ")";
-            $salida = $db->update($sql, $e);
-        }
-        else{
-            $salida=-1;
-            
-        }
-
+        $sql = "UPDATE genero SET ge_nombre='" . $nombre . "' WHERE (id_genero =" . $idGenero . ")";
+        $salida = $db->update($sql, $e);
+        
         return $salida;
+    }
+    /*funcion para mostrar un Genero de la base de datos*/ 
+    function getGenero($idGenero){
+        global $db; # manejo la bases de datos dentro de la funcion
+
+        # creo la consulta SQL
+        $sql = "SELECT id_genero, ge_nombre
+                FROM genero
+                WHERE id_genero = ".$idGenero.";";
+
+        # la envio a la bases de datos, SELECT
+        $resultado = $db->select( $sql );
+
+        # retorno la lista como resultado
+        return $resultado[0];
     }
 
 }
