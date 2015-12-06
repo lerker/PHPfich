@@ -59,6 +59,10 @@ class Ingreso_Controller {
 		$tpl->assign("var_link_mostrar", "Baja Artista");
 
 		$tpl->newBlock("blockItemMenu");
+		$tpl->assign("var_link_direccion", "index.php?action=Artista::modificarArtista");
+		$tpl->assign("var_link_mostrar", "Modificar Artista");
+
+		$tpl->newBlock("blockItemMenu");
 		$tpl->assign("var_link_direccion", "index.php?action=Actor::bajaActor");
 		$tpl->assign("var_link_mostrar", "Baja Actor");
 
@@ -69,6 +73,10 @@ class Ingreso_Controller {
 		$tpl->newBlock("blockItemMenu");
 		$tpl->assign("var_link_direccion", "index.php?action=Genero::bajaGenero");
 		$tpl->assign("var_link_mostrar", "Baja Genero");
+
+		$tpl->newBlock("blockItemMenu");
+		$tpl->assign("var_link_direccion", "index.php?action=Genero::modificarGenero");
+		$tpl->assign("var_link_mostrar", "Modificar Genero");
 
     return $tpl->getOutputContent();
   }

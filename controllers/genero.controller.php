@@ -53,7 +53,10 @@ class Genero_Controller{
         #die;
         $model = new Genero_Model();
         $salida = $model->insertarGenero($nombre);
-
+        if($salida==-1){
+            echo "No ingreso un nombre, no se pudo agregar el Genero";
+            die;
+        }
         return $this->listadoGeneros();
     }
     
@@ -89,6 +92,49 @@ class Genero_Controller{
         $idGenero = $_REQUEST["nombre_gen"];
         $model = new Genero_Model();
         $salida = $model->eliminarGenero($idGenero);
+        if($salida==-1){
+            echo "No selecciono un genero, no se pudo eliminar ningun Genero";
+            die;
+        }
+        return $this->listadoGeneros();
+    }
+    
+    function modificarGenero() {
+        $model = new Genero_Model();
+
+        $tpl = new TemplatePower("templates/modificarGenero.html");
+
+        $tpl->prepare();  # segunda linea necesaria
+        $tpl->gotoBlock("_ROOT"); # desde el comienzo
+
+        $listado_generos = $model->listadoGeneros();
+
+        if ($listado_generos) {
+            $tpl->gotoBlock("_ROOT");
+            foreach ($listado_generos as $data) {
+                $tpl->newBlock("blockModGenero");
+                $tpl->assign("var_gen_id", $data["id_genero"]);
+                $tpl->assign("var_gen_nombre", $data["ge_nombre"]);
+            }
+        } else {
+            $tpl->gotoBlock("_ROOT");
+            #$tpl->newBlock("block_no_Generos");
+            #$tpl->assign("var_texto_no_Generos", "<b>NO HAY GENEROS</b>");
+        }
+        # finalizo la transaccion, es necesaria
+        return $tpl->getOutputContent();
+    }
+    
+    function actualizarGenero() {
+        $idGenero = $_REQUEST["nombre_gen"];
+        $nombre = $_REQUEST["nombre"];
+        
+        $model = new Genero_Model();
+        $salida = $model->actualizarGenero($idGenero, $nombre);
+        if($salida==-1){
+            echo "Seleccione correctamente un genero a cambiar y especifique su nuevo nombre";
+            die;
+        }
         return $this->listadoGeneros();
     }
 

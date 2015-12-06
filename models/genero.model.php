@@ -20,27 +20,46 @@ class Genero_Model {
     function insertarGenero($nombre) {
         # proceso: insertar GENERO
         global $db; // bases de datos dentro de la funcion
-        $sql = "INSERT genero(id_genero, ge_nombre)
+        if($nombre!=NULL){
+            $sql = "INSERT genero(id_genero, ge_nombre)
                 VALUES ('','" . $nombre . "')";
-
-        $idGenero = $db->insert($sql, true, $e);
-
-        $salida = NULL;
-        if (isset($idGenero)) {
-            $salida = $idGenero;
-        } else {
-            $salida = -1;
+            $salida = $db->insert($sql, true, $e);
         }
+        else{
+            //echo "No ingreso un nombre, no se puedo insertar el Genero";
+            $salida=-1;
+            
+        }
+        
         return $salida;
     }
 /*funcion para eliminar un Genero de la base de datos*/ 
-        function eliminarGenero($value) {
+    function eliminarGenero($value) {
         global $db; // bases de datos dentro de la funcion
-        $sql = "DELETE FROM genero WHERE (id_genero =" . $value . ")";
         
-        $resultado = $db->delete($sql, $e);
+        if($value!="noSelect"){
+            $sql = "DELETE FROM genero WHERE (id_genero =" . $value . ")";
+            $salida = $db->delete($sql, $e);
+        }
+        else{
+            $salida=-1;
+        }
+        return $salida;
+    }
+    
+    function actualizarGenero($idGenero, $nombre) {
+        # proceso: insertar ARTISTA
+        global $db; // bases de datos dentro de la funcion
+        if(($idGenero!="noSelect")&&($nombre!=NULL)){
+            $sql = "UPDATE genero SET ge_nombre='" . $nombre . "' WHERE (id_genero =" . $idGenero . ")";
+            $salida = $db->update($sql, $e);
+        }
+        else{
+            $salida=-1;
+            
+        }
 
-        return $resultado;
+        return $salida;
     }
 
 }

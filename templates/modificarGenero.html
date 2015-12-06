@@ -1,0 +1,40 @@
+<form id="frmModificarGenero" name="frmModificarGenero" method=post> 
+  <input type="hidden" id="action" name="action" value="Genero::actualizarGenero">	
+
+  <table align="center" border="0" cellpadding="3" cellspacing="0" width="90%">
+
+
+    <tr>
+      <th colspan="4" align="center"> <b>Modificar Genero</b></th>
+    </tr>
+
+    <tr><td><br /></td></tr>
+
+    <tr>
+      <th align="right" width="35%">Genero: </th>
+      <td align="left">
+        <select name="nombre_gen" id="nombre_gen">
+          <option value="noSelect"> -- Seleccionar un Genero -- </option>
+          <!-- START BLOCK : blockModGenero -->
+          <option value={var_gen_id}>{var_gen_nombre}</option>
+          <!-- END BLOCK : blockModGenero -->
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <th align="right" width="35%">Nombre nuevo: </th>
+      <td align="left"><input type="text" name="nombre" id="nombre" size="50" maxlength="150"></td>
+    </tr>
+
+    <tr><td><br /></td></tr>
+    <tr>
+      <td colspan="2" align="center">
+        <input type="button" onclick="location.href='index.php?action=Ingreso::main'" value=" Volver ">
+        <input type="submit" value=" Modificar ">
+      </td>
+    </tr>
+    <tr><td><br /></td></tr>
+
+  </table>
+</form>

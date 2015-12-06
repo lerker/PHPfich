@@ -27,7 +27,10 @@ class Artista_Controller{
         #die;
         $model = new Artista_Model();
         $salida = $model->insertarArtista($nombre, $apellido, $dni, $mail);
-
+        if($salida==-1){
+            echo "No ingreso correctamente nombre y apellido, no se pudo agregar el Artista";
+            die;
+        }
         return $this->listadoArtistas();
     }
  /* funcion que me lista todos los Artistas*/ /*OJO ACA ESTA METIDO TMB EL FORMULARIO*/  
@@ -100,7 +103,58 @@ class Artista_Controller{
         $idArtista = $_REQUEST["nombre_apellido"];
         $model = new Artista_Model();
         $salida = $model->eliminarArtista($idArtista);
+        if($salida==-1){
+            echo "No selecciono un Artista, no se elimino ningun Artista ";
+            die;
+        }
         return $this->listadoArtistas();
     }
+    
+    function modificarArtista() {
+        $model = new Artista_Model();
+
+        $tpl = new TemplatePower("templates/modificarArtista.html");
+
+        $tpl->prepare();  # segunda linea necesaria
+        $tpl->gotoBlock("_ROOT"); # desde el comienzo
+
+        $listado_artistas = $model->listadoArtistas();
+
+        if ($listado_artistas) {
+            $tpl->gotoBlock("_ROOT");
+            foreach ($listado_artistas as $data) {
+                $tpl->newBlock("blockModArtista");
+                $tpl->assign("var_artista_id", $data["id_artista"]);
+                $aux=$data["ar_nombre"];//esto es una negrada..pero funcaa..ver de cambiarlo si llegamos
+                $aux.=" ";
+                $aux.=$data["ar_apellido"];
+                $tpl->assign("var_ar_nombre", $aux);
+                
+            }
+        } else {
+            $tpl->gotoBlock("_ROOT");
+            #$tpl->newBlock("block_no_Artistas");
+            #$tpl->assign("var_texto_no_artista", "<b>NO HAY ARTISTAS</b>");
+        }
+        # finalizo la transaccion, es necesaria
+        return $tpl->getOutputContent();
+    }
+    
+    function actualizarArtista() {
+        $idArtista = $_REQUEST["nombre_apellido"];
+        $nombre = $_REQUEST["nombre"];
+        $apellido = $_REQUEST["apellido"];
+        $dni = $_REQUEST["dni"];
+        $mail = $_REQUEST["mail"];
+        
+        $model = new Artista_Model();
+        $salida = $model->actualizarArtista($idArtista, $nombre, $apellido, $dni, $mail);
+        if($salida==-1){
+            echo "Seleccione correctamente un Artista a Modificar y especifique su nuevo nombre y apellido";
+            die;
+        }
+        return $this->listadoArtistas();
+    }
+
 }
 ?>
