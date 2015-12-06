@@ -350,6 +350,8 @@ class Pelicula_Controller{
     $id_pelicula = $_REQUEST["id"];
 
     $model = new Pelicula_Model();
+    $modelGeneros = new Genero_Model();
+    $modelDirectores = new Director_Model();
 
     $tpl = new TemplatePower("templates/altaPelicula.html");
 
@@ -365,7 +367,7 @@ class Pelicula_Controller{
     $tpl->assign("var_fe_peli",$pelicula["pe_fechaEstreno"]);
 
 
-    $listado_generos = $model->listadoGeneros();
+    $listado_generos = $modelGeneros->listadoGeneros();
 
     if ($listado_generos){
       $tpl->gotoBlock("_ROOT");
@@ -389,7 +391,7 @@ class Pelicula_Controller{
     //------
 
 
-    $listado_director = $model->listadoDirectores();
+    $listado_director = $modelDirectores->listadoDirectores();
 
     if ($listado_director){
       $tpl->gotoBlock("_ROOT");
