@@ -21,18 +21,30 @@ class Artista_Controller {
         $apellido = $_REQUEST["apellido"];
         $dni = $_REQUEST["dni"];
         $mail = $_REQUEST["mail"];
-
+        $tipo = $_REQUEST["tipo"];
         $model = new Artista_Model();
         $salida = $model->insertarArtista($nombre, $apellido, $dni, $mail);
        
-        if ($salida == -1) {
-            echo "NO se puedo agregar a la base de datos";
-        } else {
-            echo"Se agrego correctamente a la base de datos";
-            
+//        if ($salida == -1) {
+//            echo "NO se puedo agregar a la base de datos";
+//        } else {
+//            echo"Se agrego correctamente a la base de datos";
+//            
+//        }
+        if ($salida != -1)
+        {
+            if ($tipo == "actor")
+            {   
+                $controller = new Actor_Controller();
+                return $controller->altaActor();    
+            }
+            else 
+            {
+                $controller = new Director_Controller();
+                return $controller->altaDirector();
+            }
         }
-
-        return $this->listadoArtistas();
+//        return $this->listadoArtistas();
     }
 
     /* funcion que me lista todos los Artistas */
