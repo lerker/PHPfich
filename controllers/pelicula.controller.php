@@ -246,6 +246,9 @@ class Pelicula_Controller{
                                                 $_REQUEST["nombrePelicula"],
                                                 $_REQUEST["duracion"],
                                                 $_REQUEST["fechaEstreno"]);
+
+            global $messages;
+            $messages = "<span style=color:##0000FF> <span style=background-color:#FFFF00> Agregada con exito!!   ";
             return $this->listadoPeliculas();
         }
     }
@@ -253,21 +256,19 @@ class Pelicula_Controller{
     function eliminarPelicula($idPelicula=null) {
         # se separan en mostrar el formulario, y en el envio de los datos del mismo
         if( $_SERVER['REQUEST_METHOD'] == 'POST' ){
-
             $model = new Pelicula_Model();
-
             $salida = $model->eliminarPelicula($idPelicula);
 
             return $salida;
         }
         if( $_SERVER['REQUEST_METHOD'] == 'GET' ){
-            # TODO
-            #$id_pelicula = id
             $id_pelicula = $_REQUEST["id"];
 
-            # $this->eliminarPelicula($id_pelicula);
             $model = new Pelicula_Model();
             $resultado = $model->eliminarPelicula($id_pelicula);
+
+            global $messages;
+            $messages = "<span style=color:##FF0000> <span style=background-color:#FFFF00> Eliminado con exito!!   ";
 
             return $this->listadoPeliculas();
         }
@@ -275,73 +276,75 @@ class Pelicula_Controller{
 
     # carga formulario con los cambios
     function editarPelicula() {
-        $id_pelicula = $_REQUEST["id"];
+        # se separan en mostrar el formulario, y en el envio de los datos del mismo
+        if( $_SERVER['REQUEST_METHOD'] == 'GET' ){
+            $id_pelicula = $_REQUEST["id"];
 
-        $model = new Pelicula_Model();
-        $modelGeneros = new Genero_Model();
-        $modelDirectores = new Director_Model();
+            $model = new Pelicula_Model();
+            $modelGeneros = new Genero_Model();
+            $modelDirectores = new Director_Model();
 
-        $tpl = new TemplatePower("templates/editarPelicula.html");
+            $tpl = new TemplatePower("templates/editarPelicula.html");
 
-        $tpl->prepare();  # segunda linea necesaria
-        $tpl->gotoBlock("_ROOT"); # desde el comienzo
+            $tpl->prepare();  # segunda linea necesaria
+            $tpl->gotoBlock("_ROOT"); # desde el comienzo
 
-        $pelicula = $model->getPelicula($id_pelicula);
-        $tpl->assign("var_nom_pelicula",$pelicula["pe_nombre"]);
-        $tpl->assign("var_dur_peli",$pelicula["pe_duracion"]);
-        $tpl->assign("var_fe_peli",$pelicula["pe_fechaEstreno"]);
+            $pelicula = $model->getPelicula($id_pelicula);
+            $tpl->assign("var_nom_pelicula",$pelicula["pe_nombre"]);
+            $tpl->assign("var_dur_peli",$pelicula["pe_duracion"]);
+            $tpl->assign("var_fe_peli",$pelicula["pe_fechaEstreno"]);
 
-        $listado_generos = $modelGeneros->listadoGeneros();
+            $listado_generos = $modelGeneros->listadoGeneros();
 
-        if ($listado_generos){
-            $tpl->gotoBlock("_ROOT");
-            foreach ($listado_generos as $data) {
-                $tpl->newBlock("blockGenero");
-                $tpl->assign("var_genero_id", $data["id_genero"]);
-                $tpl->assign("var_genero_nom", $data["ge_nombre"]);
-                if ($data["ge_nombre"] == $pelicula["ge_nombre"])
-                    $tpl->assign("var_selected","selected");
+            if ($listado_generos){
+                $tpl->gotoBlock("_ROOT");
+                foreach ($listado_generos as $data) {
+                    $tpl->newBlock("blockGenero");
+                    $tpl->assign("var_genero_id", $data["id_genero"]);
+                    $tpl->assign("var_genero_nom", $data["ge_nombre"]);
+                    if ($data["ge_nombre"] == $pelicula["ge_nombre"])
+                        $tpl->assign("var_selected","selected");
+                }
             }
-        }
-        else{
-            $tpl->gotoBlock("_ROOT");
-            #$tpl->newBlock("block_no_Actores");
-            #$tpl->assign("var_texto_no_actor", "<b>NO HAY ACTORES PARA ESA PELICULA</b>");
-        }
-        $listado_director = $modelDirectores->listadoDirectores();
-
-        if ($listado_director){
-            $tpl->gotoBlock("_ROOT");
-            foreach ($listado_director as $data) {
-                $tpl->newBlock("blockDirector");
-                $tpl->assign("var_director_id", $data["id_director"]);
-                $tpl->assign("var_director_nom", $data["di_nombreArtistico"]);
-                if ($data["di_nombreArtistico"] == $pelicula["di_nombreArtistico"])
-                    $tpl->assign("var_selected","selected");
+            else{
+                $tpl->gotoBlock("_ROOT");
+                #$tpl->newBlock("block_no_Actores");
+                #$tpl->assign("var_texto_no_actor", "<b>NO HAY ACTORES PARA ESA PELICULA</b>");
             }
-        }
-        else{
-            $tpl->gotoBlock("_ROOT");
-            #$tpl->newBlock("block_no_Actores");
-            #$tpl->assign("var_texto_no_actor", "<b>NO HAY ACTORES PARA ESA PELICULA</b>");
-        }
-        return $tpl->getOutputContent();
-    }
+            $listado_director = $modelDirectores->listadoDirectores();
 
-    # edita una pelicula que viene de un formulario
-    function editarPelicula_formulario() {
-        $model = new Pelicula_Model();
-        $res = $model->editarPelicula( $_REQUEST['id'], $_REQUEST['nombrePelicula'], $_REQUEST['genero'], $_REQUEST['director'], $_REQUEST['duracion'], $_REQUEST['fechaEstreno'] );
-        unset($model);
-        if ( $res == -1 ){
-            echo "No se pudo editar la Pelicula, errores en los campos proporcionados";
-            die;
+            if ($listado_director){
+                $tpl->gotoBlock("_ROOT");
+                foreach ($listado_director as $data) {
+                    $tpl->newBlock("blockDirector");
+                    $tpl->assign("var_director_id", $data["id_director"]);
+                    $tpl->assign("var_director_nom", $data["di_nombreArtistico"]);
+                    if ($data["di_nombreArtistico"] == $pelicula["di_nombreArtistico"])
+                        $tpl->assign("var_selected","selected");
+                }
+            }
+            else{
+                $tpl->gotoBlock("_ROOT");
+                #$tpl->newBlock("block_no_Actores");
+                #$tpl->assign("var_texto_no_actor", "<b>NO HAY ACTORES PARA ESA PELICULA</b>");
+            }
+            return $tpl->getOutputContent();
         }
-        else {
-            global $messages;
-            $messages = "<span style=color:#01DF01> <span style=background-color:#F3FF00> Editado con exito!!   ";
+
+        if( $_SERVER['REQUEST_METHOD'] == 'POST' ){
+            $model = new Pelicula_Model();
+            $res = $model->editarPelicula( $_REQUEST['id'], $_REQUEST['nombrePelicula'], $_REQUEST['genero'], $_REQUEST['director'], $_REQUEST['duracion'], $_REQUEST['fechaEstreno'] );
+            unset($model);
+            if ( $res == -1 ){
+                echo "No se pudo editar la Pelicula, errores en los campos proporcionados";
+                die;
+            }
+            else {
+                global $messages;
+                $messages = "<span style=color:#01DF01> <span style=background-color:#F3FF00> Editado con exito!!   ";
+            }
+            return $this->listadoPeliculas();
         }
-        return $this->listadoPeliculas();
     }
 }
 ?>
