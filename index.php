@@ -64,7 +64,9 @@ if ($_REQUEST["action"] == "") { // puede pasar que no se cargue, solo por preca
 // dentro del contenedor le incrustamos la pagina, html calculada para mostrar.
 	$tpl = new TemplatePower("recursos/_html/index.html");
 	$tpl->prepare();
-	$tpl->assign("fecha_completa",date("d/m/y : h:m:s"));
+    #date("d/m/y")
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+	$tpl->assign("fecha_completa",date('d/m/y h:i:s A'));
 	$tpl->assign("aplicacion","Cine El SOBON");
 
 //===========================================================================================================
