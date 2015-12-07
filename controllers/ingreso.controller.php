@@ -28,8 +28,8 @@ class Ingreso_Controller {
 		$tpl->newBlock("blockItemMenu");
 		$tpl->assign("var_link_direccion", "index.php?action=Actor::listadoActores");
 		$tpl->assign("var_link_mostrar", "Listado de Actores");
-                
-                $tpl->newBlock("blockItemMenu");
+
+        $tpl->newBlock("blockItemMenu");
 		$tpl->assign("var_link_direccion", "index.php?action=Director::listadoDirectores");
 		$tpl->assign("var_link_mostrar", "Listado de Directores");
 
@@ -58,10 +58,18 @@ class Ingreso_Controller {
         $tpl->newBlock("blockItemMenu");
 		$tpl->assign("var_link_direccion", "index.php?action=Director::altaDirector");
 		$tpl->assign("var_link_mostrar", "Alta Director");
-        
+
         $tpl->newBlock("blockItemMenu");
-                $tpl->assign("var_link_direccion", "index.php?action=Artista::AltaArtista");
-                $tpl->assign("var_link_mostrar", "Alta Artista");
+        $tpl->assign("var_link_direccion", "index.php?action=Artista::AltaArtista");
+        $tpl->assign("var_link_mostrar", "Alta Artista");
+
+        $tpl->newBlock("blockItemMenu");
+        $tpl->assign("var_link_direccion", "index.php?action=Sala::listarSalas");
+        $tpl->assign("var_link_mostrar", "Listado de Salas");
+
+        $tpl->newBlock("blockItemMenu");
+        $tpl->assign("var_link_direccion", "index.php?action=Sala::altaSala");
+        $tpl->assign("var_link_mostrar", "Alta de Sala");
 
 
     return $tpl->getOutputContent();
