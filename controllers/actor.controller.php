@@ -45,7 +45,7 @@ class Actor_Controller{
   function listadoActoresPorPelicula($idPelicula=0){
     $model = new Actor_Model();
 
-    $listado = $model->listadoActoresPorPelicula($idPelicula);
+    $listado = $model->listadoActoresPorPelicula(1);
 
         # llamo al template para la vista, la modifico a gusto
         $tpl = new TemplatePower("templates/listadoActores.html"); # creo el template
@@ -91,34 +91,34 @@ class Actor_Controller{
 
   }
   function agregarActor(){
-
-    $nombre = $_REQUEST['nombre'];
-    $apellido = $_REQUEST['apellido'];
-    $dni = $_REQUEST['dni'];
+//
+//    $nombre = $_REQUEST['nombre'];
+//    $apellido = $_REQUEST['apellido'];
+//    $dni = $_REQUEST['dni'];
     $nombreArtistico = $_REQUEST['nombreArtistico'];
-    $mail = $_REQUEST['mail'];
+//    $mail = $_REQUEST['mail'];
 
     dump($_REQUEST);
     $model = new Actor_Model();
 
-    $salida = $model->altaActor($nombre, $apellido, $dni, $mail, $nombreArtistico);
-
+//    $salida = $model->altaActor($nombre, $apellido, $dni, $mail, $nombreArtistico);
+    $salida = $model->altaActor($nombreArtistico);
     return $salida;
   }
 
 
   // ELIMINA EL ACTOR DE LA BASE DE DATOS
-  function eliminarActor($nombreArtistico=0){
+  
+   function eliminarActor($id=0){
 
-    $id = $_REQUEST["nombre_artistico"];
-
+    $id = $_REQUEST["id"];
     $model = new Actor_Model();
 
     $salida = $model->eliminarActor($id);
 
-
      return $this->listadoActores();
   }
+ 
   //ELIMINA DEL TEMPLATE EL ACTOR
   function bajaActor() {
     $model = new Actor_Model();
@@ -182,7 +182,7 @@ class Actor_Controller{
   function CamposActor()
   {
      $model = new Actor_Model();
-     $id = $_REQUEST["nombreArtistico"];
+     $id = $_REQUEST["id"];
      $tpl = new TemplatePower("templates/CamposActor.html");
      $tpl->prepare();  # segunda linea necesaria
      $Actor = $model->getActor($id);
@@ -192,12 +192,12 @@ class Actor_Controller{
             $tpl->newBlock("block_editar");
        foreach ($Actor as $data)
          {
-            $tpl->assign("id_actor",$id);
+//            $tpl->assign("id_actor",$id);
             $tpl->assign("nombreArt", $data["ac_nombreArtistico"]);
-//            $tpl->assign("nombre", $data["ar_nombre"]);
-//            $tpl->assign("apellido", $data["ar_apellido"]);
-//            $tpl->assign("dni", $data["ar_dni"]);
-//            $tpl->assign("email", $data["ar_mail"]);
+            $tpl->assign("nombre", $data["ar_nombre"]);
+            $tpl->assign("apellido", $data["ar_apellido"]);
+            $tpl->assign("dni", $data["ar_dni"]);
+            $tpl->assign("email", $data["ar_mail"]);
         }
 
      }
@@ -213,12 +213,9 @@ class Actor_Controller{
   }
   function updateActor()
   {
-      $idActor = $_REQUEST["idActor"];
+      $idActor = $_REQUEST["id"];
+      
       $nombreArtistico = $_REQUEST["nombreArtistico"];
-//      $nombre = $_REQUEST["nombreActor"];
-//      $apellido = $_REQUEST["apellidoActor"];
-//      $dni = $_REQUEST["dniActor"];
-//      $email = $_REQUEST["emailActor"];
 
       $model = new Actor_Model();
 

@@ -143,7 +143,7 @@ function peliculasPorDirector($id_director=0) {
     // ELIMINA EL ACTOR DE LA BASE DE DATOS
   function eliminarDirector($id=0){
 
-    $id = $_REQUEST["nombre_artistico"];
+    $id = $_REQUEST["id"];
     $model = new Director_Model();
 
     $Directores = $this->getDirectores($id);
@@ -223,7 +223,7 @@ function peliculasPorDirector($id_director=0) {
   function CamposDirector()
   {
      $model = new Director_Model();
-     $id = $_REQUEST["nombreArtistico"];
+     $id = $_REQUEST["id"];
      $tpl = new TemplatePower("templates/CamposDirector.html");
      $tpl->prepare();  # segunda linea necesaria
      $Director = $model->getDirectores($id);
@@ -234,12 +234,12 @@ function peliculasPorDirector($id_director=0) {
             $tpl->newBlock("block_editar");
        foreach ($Director as $data)
          {
-            $tpl->assign("id_director",$id);
+//            $tpl->assign("id_director",$id);
             $tpl->assign("nombreArt", $data["di_nombreArtistico"]);
-//            $tpl->assign("nombre", $data["ar_nombre"]);
-//            $tpl->assign("apellido", $data["ar_apellido"]);
-//            $tpl->assign("dni", $data["ar_dni"]);
-//            $tpl->assign("email", $data["ar_mail"]);
+            $tpl->assign("nombre", $data["ar_nombre"]);
+            $tpl->assign("apellido", $data["ar_apellido"]);
+            $tpl->assign("dni", $data["ar_dni"]);
+            $tpl->assign("email", $data["ar_mail"]);
         }
 
      }
@@ -255,13 +255,13 @@ function peliculasPorDirector($id_director=0) {
   }
   function updateDirector(){
 
-    $idDirector = $_REQUEST["idDirector"];
+    $idDirector = $_REQUEST["id"];
     $nombreArtistico = $_REQUEST["nombreArtistico"];
-
+   
     $model = new Director_Model();
 
     $resultado = $model->updateDirector($idDirector, $nombreArtistico);
-
+  
     $tpl = new TemplatePower("templates/Informe.html");
     $tpl->prepare();
     if ($resultado == 0 || $resultado = 1)

@@ -92,25 +92,23 @@
         }
     }
 
-      function eliminarDirector($nombreArtistico) {
+    function eliminarDirector($nombreArtistico) {
         # puedo eliminar al actor pero no al artista aun
-
         global $db; // bases de datos dentro de la funcion
-        echo $nombreArtistico;
-
-         $sql = "DELETE FROM director WHERE director.di_nombreArtistico LIKE '".$nombreArtistico."'";
-
-
+        $sql = "DELETE FROM director WHERE director.di_nombreArtistico LIKE '".$nombreArtistico."'";
         $err='';
         $cantidad = $db->delete($sql);
-
+        
         return $cantidad;
     }
     function getDirectores($id)
     {
         global $db;
 
-        $sql = "SELECT di_nombreArtistico,id_director FROM director WHERE id_director = ". $id;
+        $sql = "SELECT d.di_nombreArtistico,ar.ar_nombre, ar.ar_apellido, "
+                . "ar.ar_dni,ar.ar_mail, d.id_director FROM director d "
+                . "INNER JOIN artista ar on d.id_artista = ar.id_artista  "
+                . "WHERE id_director = ". $id;
 
         $salida = $db->select($sql);
 
@@ -123,7 +121,7 @@
 
         $sql = "UPDATE director
                 SET di_nombreArtistico = '".$nombreArtistico."'
-                WHERE id_actor = '".$idDirector."';";
+                WHERE id_director = '".$idDirector."';";
 
         $resultado = $db->update($sql);
 

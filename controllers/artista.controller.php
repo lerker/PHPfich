@@ -24,11 +24,12 @@ class Artista_Controller {
 
         $model = new Artista_Model();
         $salida = $model->insertarArtista($nombre, $apellido, $dni, $mail);
-
+       
         if ($salida == -1) {
             echo "NO se puedo agregar a la base de datos";
         } else {
             echo"Se agrego correctamente a la base de datos";
+            
         }
 
         return $this->listadoArtistas();

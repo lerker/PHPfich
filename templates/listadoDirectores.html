@@ -4,10 +4,10 @@
   <table align="center" border="1" cellpadding="5" cellspacing="0" width="90%">
 
     <tr>
-      <th colspan="5" align="center"> <b>LISTADO DIRECTORES</b></th>
+      <th colspan="7" align="center"> <b>LISTADO DIRECTORES</b></th>
     </tr>
     <tr>
-      <th colspan="5" align="center"> <b>{var_subtitulo_tabla}</b></th>
+      <th colspan="7" align="center"> <b>{var_subtitulo_tabla}</b></th>
     </tr>
     
     <tr>
@@ -16,6 +16,8 @@
         <th align="center" width="35%">Apellido: </th>
         <th align="center" width="35%">Dni: </th>
         <th align="center" width="35%">EMail: </th>
+        <th align="center" width="35%">Editar: </th>
+        <th align="center" width="35%">Borrar: </th>
     </tr>
         <!-- START BLOCK : blockDirector -->
     <tr>
@@ -26,11 +28,13 @@
       <td align="center">{var_ape_act}</td>
       <td align="center">{var_dni_act}</td>
       <td align="center">{var_mail_dir}</td>
+       <td align="center"> <a href="index.php?action=Director::CamposDirector&id={var_id_director}"> Editar </a>  </td>
+      <td align="center"> <a href="index.php?action=Director::EliminarDirector&id={var_id_director}" onclick="return confirm('Esta seguro que desea borrar el director?')"> Borrar </a>  </td>
     </tr>
          <!-- END BLOCK : blockDirector -->
          <!-- START BLOCK : block_no_Directores -->
          <tr>
-             <th colspan="5" align="center" width="35%">{var_texto_no_Director}</th>
+             <th colspan="7" align="center" width="35%">{var_texto_no_Director}</th>
          </tr>    
          <!-- END BLOCK : block_no_Directores -->
      

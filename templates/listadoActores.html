@@ -4,10 +4,10 @@
   <table align="center" border="1" cellpadding="5" cellspacing="0" width="90%">
 
     <tr>
-      <th colspan="5" align="center"> <b>LISTADO ACTORES</b></th>
+      <th colspan="7" align="center"> <b>LISTADO ACTORES</b></th>
     </tr>
     <tr>
-      <th colspan="5" align="center"> <b>{var_subtitulo_tabla}</b></th>
+      <th colspan="7" align="center"> <b>{var_subtitulo_tabla}</b></th>
     </tr>
     
     <tr>
@@ -16,6 +16,9 @@
         <th align="center" width="35%">Apellido: </th>
         <th align="center" width="35%">Dni: </th>
         <th align="center" width="35%">EMail: </th>
+        <th align="center" width="35%">Editar: </th>
+        <th align="center" width="35%">Borrar: </th>
+      
     </tr>
         <!-- START BLOCK : blockActor -->
     <tr>
@@ -26,11 +29,13 @@
       <td align="center">{var_ape_act}</td>
       <td align="center">{var_dni_act}</td>
       <td align="center">{var_mail_act}</td>
+      <td align="center"> <a href="index.php?action=Actor::CamposActor&id={var_id_act}"> Editar </a>  </td>
+      <td align="center"> <a href="index.php?action=Actor::EliminarActor&id={var_id_act}" onclick="return confirm('Esta seguro que desea borrar el actor?')"> Borrar </a>  </td>
     </tr>
          <!-- END BLOCK : blockActor -->
             <!-- START BLOCK : block_no_Actores -->
          <tr>
-             <th colspan="5" align="center" width="35%">{var_texto_no_actor}</th>
+             <th colspan="7" align="center" width="35%">{var_texto_no_actor}</th>
          </tr>    
          <!-- END BLOCK : block_no_Actores -->
      

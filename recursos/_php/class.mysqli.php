@@ -346,6 +346,8 @@ class MySQL {
       die("An error has happened in the delete function in MySQL class. "
               . "A DELETE query was expected <br/> The query was " . $strSQL);
     $this->connect();
+    $setear = "SET FOREIGN_KEY_CHECKS=0";
+    @mysqli_query($this->dbConn, $setear);
     $resource = @mysqli_query($this->dbConn, $strSQL);
     if (!$resource) {
       $mysql_error = mysqli_error($this->dbConn);
@@ -355,6 +357,8 @@ class MySQL {
       //die ("An error has happened in the delete function in MySQL class. "
       //   ."$mysql_error <br/> The query was $strSQL" );
     }
+    $setear = "SET FOREIGN_KEY_CHECKS=1";
+    @mysqli_query($this->dbConn, $setear);
     $affectedRows = mysqli_affected_rows($this->dbConn);
     $this->rows = NULL;
     $this->lastOperation = 'delete';

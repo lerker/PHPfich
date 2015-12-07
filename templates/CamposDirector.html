@@ -9,30 +9,30 @@
     <div><input type="text" name="idArtista" id="idArtista" value="{id_artista}" style="visibility:hidden"></div>
      <tr>
       <th align="right" width="35%">Nombre Artistico: </th>
-      <td align="left"><input type="text" name="nombreArtistico" id="nombreArtistico" size="50" maxlength="150" value="{nombreArt}"></td>
+      <td align="left"><input type="text" required name="nombreArtistico" id="nombreArtistico" size="50" maxlength="150" value="{nombreArt}"></td>
     </tr>
-<!--    <tr>
+    <tr>
       <th align="right" width="35%">Nombre: </th>
-      <td align="left"><input type="text" name="nombreActor" id="nombreActor" size="50" maxlength="150" value="{nombre}"></td>
+      <td align="left"><input type="text" readonly name="nombreDirector" id="nombreDirector" size="50" maxlength="150" value="{nombre}"></td>
     </tr>
     <tr>
       <th align="right" width="35%">Apellido: </th>
-      <td align="left"><input type="text" name="apellidoActor" id="apellidoActor" size="50" maxlength="150" value="{apellido}"></td>
+      <td align="left"><input type="text" readonly name="apellidoDirector" id="apellidoDirector" size="50" maxlength="150" value="{apellido}"></td>
     </tr>
     <tr>
       <th align="right" width="35%">DNI: </th>
-      <td align="left"><input type="text" name="dniActor" id="dniActor" size="50" maxlength="150" value="{dni}"></td>
+      <td align="left"><input type="text" readonly name="dniDirector" id="dniDirector" size="50" maxlength="150" value="{dni}"></td>
     </tr>
     <tr>
       <th align="right" width="35%">EMAIL: </th>
-      <td align="left"><input type="text" name="emailActor" id="emailActor" size="50" maxlength="150" value="{email}"></td>
+      <td align="left"><input type="text" readonly name="emailDirector" id="emailDirector" size="50" maxlength="150" value="{email}"></td>
     </tr>
-  -->
+  
     
       <tr><td><br /></td></tr>    
     <tr>
       <td colspan="2" align="center">
-        <input type="button" onclick="location.href='index.php?action=Director::EditarDirector'" value=" Volver ">
+        <input type="button" onclick="location.href='index.php?action=Director::listadoDirectores'" value=" Volver ">
         <input type="submit" value=" Guardar ">
       </td>
     </tr>
@@ -45,7 +45,7 @@
          </tr>    
       <tr>
       <td colspan="2" align="center">
-        <input type="button" onclick="location.href='index.php?action=Actor::EditarDirector'" value=" Volver ">
+        <input type="button" onclick="location.href='index.php?action=Actor::listadoActores'" value=" Volver ">
       </td>
       </tr>
            <tr><td><br /></td></tr>

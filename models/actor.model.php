@@ -22,7 +22,8 @@ class Actor_Model{
 
     // ALTA Y BAJA
      # retorna el Id del actor insertado, -1 para error
-    function altaActor($nombre, $apellido, $dni, $mail, $nombreArtistico) {
+//    function altaActor($nombre, $apellido, $dni, $mail, $nombreArtistico) {
+        function altaActor($nombre, $apellido, $dni, $mail, $nombreArtistico) {
         # proceso: insertar ARTISTA, insertar dicho artista como ACTOR
 
         global $db; // bases de datos dentro de la funcion
@@ -57,12 +58,11 @@ class Actor_Model{
 
         global $db; // bases de datos dentro de la funcion
 
-
         $sql = "DELETE FROM actor WHERE actor.id_actor LIKE '".$idActor."';";
-
+    
         $err='';
         $cantidad = $db->delete($sql);
-
+    dump($cantidad);
         return $cantidad;
     }
 
@@ -116,5 +116,6 @@ class Actor_Model{
 //                            ar.ar_mail = '".$email."'
 //                            WHERE ac.id_artista = '".$idArtista."'";
     }
+    
 }
 ?>
