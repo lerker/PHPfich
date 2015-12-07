@@ -22,8 +22,8 @@
 	<tr>
 <!--		<td align="left"> {var_id_peli} </td> -->
 		<td align="left"> {var_nom_peli} </td>
-		<td align="center"> {var_gen_peli} </td>
-		<td align="left"> {var_dir_peli} </td>
+		<td align="center"> <a href="index.php?action=Pelicula::peliculasPorGenero&id={var_id_gen}"> {var_gen_peli} </a> </td>
+		<td align="center"> <a href="index.php?action=Pelicula::peliculasPorDirector&id={var_id_dir}">  {var_dir_peli} </a> </td>
 		<td align="center"> {var_dur_peli} </td>
 		<td align="left"> {var_act_peli} </td>
 		<td align="center"> <a href="index.php?action=Pelicula::editarPelicula&id={var_id_peli}"> Editar </a>  </td>

@@ -44,6 +44,9 @@ class Pelicula_Controller{
                 $tpl->assign("var_dur_peli", $data["pe_duracion"]);
                 $tpl->assign("var_act_peli", implode(", ", $act));
                 $tpl->assign("var_id_peli",  $data["id_pelicula"]);
+
+                $tpl->assign("var_id_gen", $data["id_genero"]);
+                $tpl->assign("var_id_dir", $data["id_director"]);
             }
         }
         else{ // no hay peliculas
@@ -55,8 +58,11 @@ class Pelicula_Controller{
     }
 
     # TODO borrar esto a futuro, dejar la tercera funcion,
-    function peliculasPorGenero($id_genero=0) {
+    function peliculasPorGenero() {
+        $id_genero = $_REQUEST["id"];
+
         $model = new Pelicula_Model();
+        $modelActores = new Actor_Model();
 
         $listado = $model->peliculasPorGenero($id_genero);
 
@@ -71,19 +77,22 @@ class Pelicula_Controller{
         # si listado retorno algo, NO ESTA VACIO
         if ($listado){
             $tpl->gotoBlock("_ROOT");
-            foreach ($listado as $data) { # para cada elemento del listado lo cargo en la tabla
-                $actores = $model->listadoActoresPorPelicula($data["id_pelicula"]);
+            foreach ($listado as $data) {
+                # genero la lista de los actores, segun el id de pelicula
+                $actores = $modelActores->listadoActoresPorPelicula($data["id_pelicula"]);
                 $act = array();
-                foreach ($actores as $key) { #para todos los resultados, me quedo con el nombre artistico
+                if ($actores){
+                    foreach ($actores as $key) { #para todos los resultados, me quedo con el nombre artistico
                     array_push($act, $key["ac_nombreArtistico"]);
+                    }
                 }
-            $tpl->newBlock("blockPelicula");
-            $tpl->assign("var_id_peli",  $data["id_pelicula"]);
-            $tpl->assign("var_nom_peli", $data["pe_nombre"]);
-            $tpl->assign("var_gen_peli", $data["ge_nombre"]);
-            $tpl->assign("var_dir_peli", $data["di_nombreArtistico"]);
-            $tpl->assign("var_dur_peli", $data["pe_duracion"]);
-            $tpl->assign("var_act_peli", implode(", ", $act));
+                $tpl->newBlock("blockPelicula");
+                $tpl->assign("var_id_peli",  $data["id_pelicula"]);
+                $tpl->assign("var_nom_peli", $data["pe_nombre"]);
+                $tpl->assign("var_gen_peli", $data["ge_nombre"]);
+                $tpl->assign("var_dir_peli", $data["di_nombreArtistico"]);
+                $tpl->assign("var_dur_peli", $data["pe_duracion"]);
+                $tpl->assign("var_act_peli", implode(", ", $act));
             }
         }
         else{ // no hay peliculas
@@ -94,9 +103,10 @@ class Pelicula_Controller{
       return $tpl->getOutputContent();
     }
 
-    function peliculasPorDirector($id_director=0) {
-
+    function peliculasPorDirector() {
+        $id_director = $_REQUEST["id"];
         $model = new Pelicula_Model();
+        $modelActores = new Actor_Model();
 
         $listado = $model->peliculasPorDirector($id_director);
 
@@ -109,19 +119,23 @@ class Pelicula_Controller{
 
         if ($listado){
             $tpl->gotoBlock("_ROOT");
-            foreach ($listado as $data) { # para cada elemento del listado lo cargo en la tabla
-                $actores = $model->listadoActoresPorPelicula($data["id_pelicula"]);
+            foreach ($listado as $data) {
+                # genero la lista de los actores, segun el id de pelicula
+                $actores = $modelActores->listadoActoresPorPelicula($data["id_pelicula"]);
                 $act = array();
-                foreach ($actores as $key) { #para todos los resultados, me quedo con el nombre artistico
+                if ($actores){
+                    foreach ($actores as $key) { #para todos los resultados, me quedo con el nombre artistico
                     array_push($act, $key["ac_nombreArtistico"]);
+                    }
                 }
-            $tpl->newBlock("blockPelicula");
-            $tpl->assign("var_id_peli",  $data["id_pelicula"]);
-            $tpl->assign("var_nom_peli", $data["pe_nombre"]);
-            $tpl->assign("var_gen_peli", $data["ge_nombre"]);
-            $tpl->assign("var_dir_peli", $data["di_nombreArtistico"]);
-            $tpl->assign("var_dur_peli", $data["pe_duracion"]);
-            $tpl->assign("var_act_peli", implode(", ", $act));    # implode(como_separo, array) # convierte a string el array
+
+                $tpl->newBlock("blockPelicula");
+                $tpl->assign("var_id_peli",  $data["id_pelicula"]);
+                $tpl->assign("var_nom_peli", $data["pe_nombre"]);
+                $tpl->assign("var_gen_peli", $data["ge_nombre"]);
+                $tpl->assign("var_dir_peli", $data["di_nombreArtistico"]);
+                $tpl->assign("var_dur_peli", $data["pe_duracion"]);
+                $tpl->assign("var_act_peli", implode(", ", $act));    # implode(como_separo, array) # convierte a string el array
             }
         }
         else{ // no hay peliculas

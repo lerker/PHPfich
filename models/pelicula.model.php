@@ -6,7 +6,7 @@ class Pelicula_Model{
         global $db; # manejo la bases de datos dentro de la funcion
 
         # creo la consulta SQL
-        $sql = "SELECT p.id_pelicula, p.pe_nombre, g.ge_nombre, d.di_nombreArtistico, p.pe_duracion
+        $sql = "SELECT p.id_pelicula, p.pe_nombre, p.id_genero, g.ge_nombre, p.id_director, d.di_nombreArtistico, p.pe_duracion
                     FROM pelicula p
                     INNER JOIN genero g
                     ON p.id_genero = g.id_genero
