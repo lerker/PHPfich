@@ -16,10 +16,13 @@ class Pelicula_Controller{
         $tpl->gotoBlock("_ROOT"); # desde el comienzo
 
         # formateo del encabezado de la tabla
-        $titulo_tabla = "<h1> LISTADO DE PELICULAS </h1>";
-        $subtitulo_tabla = "<strong><i> Cantidad: ".count($listado)."</i></strong>";
-        $tpl->assign("var_titulo_tabla",  $titulo_tabla);
-        $tpl->assign("var_subtitulo_tabla",  $subtitulo_tabla);
+        $tpl->assign("var_titulo_tabla",  "LISTADO DE PELICULAS");
+        global $messages;
+        if (is_null( $messages ))
+            $tpl->assign("var_subtitulo_tabla", "Cantidad: ".count($listado));
+        else
+            $tpl->assign("var_subtitulo_tabla", $messages."Cantidad: ".count($listado));
+        $messages = null;
 
         if ($listado){
             $tpl->gotoBlock("_ROOT");
@@ -335,7 +338,8 @@ class Pelicula_Controller{
             die;
         }
         else {
-            echo "Editado con Exito!!";
+            global $messages;
+            $messages = "<span style=color:#01DF01> <span style=background-color:#F3FF00> Editado con exito!!   ";
         }
         return $this->listadoPeliculas();
     }
