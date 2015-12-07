@@ -135,7 +135,7 @@ class MySQL {
 
   /*
    * MySQLResult(& $mysql, $query)
-   * 
+   *
    */
   function MySQLResult(& $mysql, $query) {
     $this->mysql = & $mysql;
@@ -144,7 +144,7 @@ class MySQL {
 
   /*
    * fetchRow($query)
-   * 
+   *
    */
   function fetchRow($query) {
     if ($row = @mysqli_fetch_array($query, MYSQL_ASSOC)) {
@@ -237,14 +237,14 @@ class MySQL {
 
   /*
    * insert($strSQL, $getLastID = true, &$error_sql = '')
-   * 
+   *
    * Funcion para realizar consultas insert, si la consulta pasada como parametro no es
    * una consulta insert se termina la ejecucion y se informa el error.
    * Si la consulta se realiza con exito y el parametro $getLastId = false, se retorna
    * true en caso de haber podido realizar la insersion y false en caso contrario.
    * Si la consulta se realiza con exito y el parametro $getLastId = true, se retorna el
    * id de la ultima insersion.
-   * 
+   *
    */
   function insert($strSQL, $getLastID = true, &$error_sql = '') {
     if (strtolower(substr(trim($strSQL), 0, 6)) != "insert")
@@ -278,7 +278,7 @@ class MySQL {
 
   /*
    * begin()
-   * 
+   *
    */
   function begin() {
     return @mysqli_query($this->dbConn, "BEGIN");
@@ -286,7 +286,7 @@ class MySQL {
 
   /*
    * rollback()
-   * 
+   *
    */
   function rollback() {
     return @mysqli_query($this->dbConn, "ROLLBACK");
@@ -294,7 +294,7 @@ class MySQL {
 
   /*
    * commit()
-   * 
+   *
    */
   function commit() {
     return @mysqli_query($this->dbConn, "COMMIT");
@@ -302,13 +302,13 @@ class MySQL {
 
   /*
    * update($strSQL, &$error_sql = '')
-   * 
+   *
    * Función para realizar consultas update, si la consulta pasada como parámetro no es
    * una consulta update se termina la ejecución y se informa el error.
    * Si la consulta se realiza con éxito esta función retorna el número de filas afectadas
    * por esta actualización (solo el número de filas realmente actualizadas, y no aquellas que
    * cumplan con la clausula WHERE y posean el mismo valor que el valor a actualizar)
-   * 
+   *
    */
   function update($strSQL, &$error_sql = '') {
     if (strtolower(substr(trim($strSQL), 0, 6)) != "update")
@@ -335,11 +335,11 @@ class MySQL {
 
   /*
    * delete($strSQL, &$error_sql = '')
-   * 
+   *
    * Funcion para realizar consultas delete, si la consulta pasada como parametro no es
    * una consulta delete se termina la ejecucion y se informa el error.
    * Si la consulta se realiza con exito esta funcion retorna el numero de filas eliminadas
-   * 
+   *
    */
   function delete($strSQL, &$error_sql = '') {
     if (strtolower(substr(trim($strSQL), 0, 6)) != "delete")

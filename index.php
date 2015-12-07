@@ -20,6 +20,7 @@ include("./config/inc.includes.php");
 if (!isset($db)){  // si no esta la db seteada
 	if ($config["dbEngine"]=="MYSQL"){
 		$db = new MySQL($config["dbhost"],$config["dbuser"],$config["dbpass"],$config["db"]);
+        #mysqli_set_charset("utf8");
 	}
 	//var_dump($db);
 }
